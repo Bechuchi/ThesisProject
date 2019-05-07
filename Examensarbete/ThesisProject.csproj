@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="itext7" Version="7.1.6" />
+    <PackageReference Include="iTextSharp" Version="5.5.13" />
+    <PackageReference Include="itextsharp.pdfa" Version="5.5.13" />
+    <PackageReference Include="itextsharp.xfaworker" Version="5.5.13" />
+    <PackageReference Include="itextsharp.xmlworker" Version="5.5.13" />
+    <PackageReference Include="itextsharp.xtra" Version="5.5.13" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="itext.io">
+      <HintPath>..\..\..\..\iText7-dotnet-7.0.0\iText7-dotnet-7.0.0\itext.io.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.kernel">
+      <HintPath>..\..\..\..\iText7-dotnet-7.0.0\iText7-dotnet-7.0.0\itext.kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.layout">
+      <HintPath>..\..\..\..\iText7-dotnet-7.0.0\iText7-dotnet-7.0.0\itext.layout.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.pdfa">
+      <HintPath>..\..\..\..\iText7-dotnet-7.0.0\iText7-dotnet-7.0.0\itext.pdfa.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

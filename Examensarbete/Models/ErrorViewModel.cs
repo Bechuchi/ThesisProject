@@ -1,6 +1,6 @@
 using System;
 
-namespace Examensarbete.Models
+namespace ThesisProject.Models
 {
     public class ErrorViewModel
     {

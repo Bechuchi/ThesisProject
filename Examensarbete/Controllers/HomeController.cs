@@ -4,40 +4,80 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Examensarbete.Models;
+using ThesisProject.ViewModels;
+using ThesisProject.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
+using ThesisProject.Data;
+using ThesisProject.Repositories;
+using System.Net;
+using System.IO;
 
-namespace Examensarbete.Controllers
+namespace ThesisProject.Controllers
 {
     public class HomeController : Controller
     {
+        private ThesisProjectDBContext _context;
+        private ModuleRepository _moduleRepository;
+
+        public HomeController(ThesisProjectDBContext context)
+        {
+            _context = context;
+            //TODO dependendy injecton
+            _moduleRepository = new ModuleRepository(_context);
+        }
+
+        
+
         public IActionResult Index()
         {
-            return View();
+            //TODO lägga i repo(?)
+            var course = _context.Course
+                .FirstOrDefault();
+
+            var modules = _moduleRepository.GetModulesForCourse(course.Id);         ;
+
+            var viewModel = new CourseViewModel
+            {
+                Name = course.Name,
+                Modules = modules
+            };
+
+            
+            return View(viewModel);
         }
 
-        public IActionResult About()
+        public ActionResult Pdf()
         {
-            ViewData["Message"] = "Your application description page.";
+            FileSeeder seeder = new FileSeeder(_context);
+            var bytes = seeder.Download();
 
-            return View();
+            var path = "C:\\Users\\Olivia\\Desktop\\Olivia_Denbu_LIA-rapport_PROG17.pdf";
+            var fileStream = new FileStream(path,
+                                     FileMode.Open,
+                                     FileAccess.Read
+                                   );
+
+            var fsResult = new FileStreamResult(fileStream, "application/pdf");
+            return fsResult;
+
+
+            //FileSeeder seeder = new FileSeeder(_context);
+            //var bytes = seeder.Download();
+
+            ////byte[] bytes = GetYourByteArrayForPDF();
+            //return File(bytes, "application/pdf", "somefriendlyname.pdf");
         }
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
+        //public File Pdf()
+        //{
+        //    return File(stream, fileName, "application/pdf")
+        //}
 
-            return View();
+            //TODO fixa seeding rätt
+            //FileSeeder seeder = new FileSeeder();
+            //seeder.Download()
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-    }
 }

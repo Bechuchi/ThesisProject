@@ -1,0 +1,9 @@
+﻿@model ThesisProject.ViewModels.ModuleViewModel
+
+<h2>@Model.Name</h2>
+<p>@Model.Facts</p>
+
+@*@foreach (var exam in Model.Exams)
+{
+    @Html.ActionLink(exam.Name, "pdf", new { id = exam.Id })
+}*@

@@ -14,6 +14,8 @@ using ThesisProject.Data;
 using ThesisProject.Repositories;
 using System.Net;
 using System.IO;
+using System.IO.Compression;
+using iTextSharp.text;
 
 namespace ThesisProject.Controllers
 {
@@ -29,15 +31,16 @@ namespace ThesisProject.Controllers
             _moduleRepository = new ModuleRepository(_context);
         }
 
-        
-
         public IActionResult Index()
         {
+            FileSeeder sd = new FileSeeder(_context);
+            sd.Download();
+
             //TODO lägga i repo(?)
             var course = _context.Course
                 .FirstOrDefault();
 
-            var modules = _moduleRepository.GetModulesForCourse(course.Id);         ;
+            var modules = _moduleRepository.GetModulesForCourse(course.Id); ;
 
             var viewModel = new CourseViewModel
             {
@@ -45,39 +48,65 @@ namespace ThesisProject.Controllers
                 Modules = modules
             };
 
-            
             return View(viewModel);
         }
 
+        //Denna kan göra så formatet av en PDF visas i browsern
+        //TODO: Få tag i filen från db
         public ActionResult Pdf()
         {
-            FileSeeder seeder = new FileSeeder(_context);
-            var bytes = seeder.Download();
-
             var path = "C:\\Users\\Olivia\\Desktop\\Olivia_Denbu_LIA-rapport_PROG17.pdf";
+
             var fileStream = new FileStream(path,
-                                     FileMode.Open,
-                                     FileAccess.Read
-                                   );
+                                            FileMode.Open,
+                                            FileAccess.Read
+                                            );
 
             var fsResult = new FileStreamResult(fileStream, "application/pdf");
+
             return fsResult;
-
-
-            //FileSeeder seeder = new FileSeeder(_context);
-            //var bytes = seeder.Download();
-
-            ////byte[] bytes = GetYourByteArrayForPDF();
-            //return File(bytes, "application/pdf", "somefriendlyname.pdf");
         }
 
-        //public File Pdf()
+        //TODO: Ta bort när pdf är fixat
+        //Läser upp ett pdf dokument i browsern men texten har skrivits in från action metoden
+        public ActionResult PdfTest()
+        {
+            MemoryStream workStream = new MemoryStream();
+            Document document = new Document();
+            PdfWriter.GetInstance(document, workStream).CloseStream = false;
+
+            document.Open();
+            document.Add(new Paragraph("Hello World"));
+            document.Add(new Paragraph(DateTime.Now.ToString()));
+            document.Close();
+
+            byte[] byteInfo = workStream.ToArray();
+            workStream.Write(byteInfo, 0, byteInfo.Length);
+            workStream.Position = 0;
+
+            return new FileStreamResult(workStream, "application/pdf");
+        }
+
+        //TODO: Ta bort när pdf funkar (förmodligen onödig då jag ska få upp min pdf från db och inte som bytes)
+        //public bool ByteArrayToFile()
         //{
-        //    return File(stream, fileName, "application/pdf")
-        //}
+        //    var fileName = "OliviasHejjarklack";
+        //    //FileSeeder seeder = new FileSeeder(_context);
+        //    //var byteArray = seeder.Download();
 
-            //TODO fixa seeding rätt
-            //FileSeeder seeder = new FileSeeder();
-            //seeder.Download()
-        }
+        //    //try
+        //    //{
+        //    //    using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+        //    //    {
+        //    //        fs.Write(byteArray, 0, byteArray.Length);
+        //    //        return true;
+        //    //    }
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    Console.WriteLine("Exception caught in process: {0}", ex);
+        //    //    return false;
+        //    //}
+        //}
+    }
 }

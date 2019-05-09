@@ -29,31 +29,15 @@ namespace ThesisProject.Data
             _context = context;
         }
 
-        public string GetTextFromPDF()
-        {
-            //TODO: try catch
-            StringBuilder text = new StringBuilder();
-            var path = "C:\\Users\\Olivia\\Desktop\\Olivia_Denbu_LIA-rapport_PROG17.pdf";
-            //path = "C:\\Users\\Olivia\\Desktop\\TestFakta.pdf";
-
-            using (PdfReader reader = new PdfReader(path))
-            {
-                for (int i = 1; i <= reader.NumberOfPages; i++)
-                {
-                    text.Append(PdfTextExtractor.GetTextFromPage(reader, i));
-                }
-            }
-
-            return text.ToString();
-        }
-
-        public void SeedFile()
+        //TODO: Fixa connectionsträng kopplat till det här projektet
+        //TODO: Stänga connection
+        public void SeedDbWithExamFile()
         {
             var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
 
             var path = "C:\\Users\\Olivia\\Desktop\\Olivia_Denbu_LIA-rapport_PROG17.pdf";
             var fi = new FileInfo("Olivia_Denbu_LIA-rapport_PROG17");
-            var documentContent = GetBytesFromFile(path);
+            var documentContent = System.IO.File.ReadAllBytes(path);
 
             //string name = fi.Name;
             //string extn = fi.Extension;
@@ -87,15 +71,9 @@ namespace ThesisProject.Data
             }
         }
       
-        public static byte[] GetBytesFromFile(string path)
-        {
-            // this method is limited to 2^32 byte files (4.2 GB)
-            var bytes = System.IO.File.ReadAllBytes(path);
-
-            return bytes;
-        }
-
-        public byte[] Download()
+        //TODO Fixa så filen går att öppna 
+        //Laddar nu ner filen men öppnar ej
+        public void Download()
         {
             var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
 
@@ -118,19 +96,14 @@ namespace ThesisProject.Data
 
 
                 //TODO: Byt ut C: till path
-                using (StreamWriter stream = new StreamWriter("C:\\Users\\Olivia\\Desktop\\testpdf.pdf"))
+                using (StreamWriter stream = new StreamWriter("C:\\Users\\Olivia\\Desktop\\download.pdf"))
                 {
                     BinaryWriter bw = new BinaryWriter(stream.BaseStream);
                     bw.Write(myBytes);
-                    //bw.Close();
-                    //System.IO.File.Delete(file);
 
-                    //FileStreamResult fileStreamResult = new FileStreamResult("application/pdf");
-                    //FileStreamResult fileStreamResult = new FileStreamResult()
-
-                    //fileStreamResult.FileDownloadName = "Sample.pdf";
                 }
-                return myBytes;
+               
+                //return myBytes;
             }
         }
     }

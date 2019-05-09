@@ -26,7 +26,7 @@ namespace ThesisProject.Repositories
             return modules;
         }
 
-        public Module GetCurrentModule(int moduleId)
+        public Module GetModule(int moduleId)
         {
             var module = _context.Module
                 .SingleOrDefault(m => m.Id == moduleId);

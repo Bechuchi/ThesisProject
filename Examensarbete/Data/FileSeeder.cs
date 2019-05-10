@@ -42,9 +42,10 @@ namespace ThesisProject.Data
             //string name = fi.Name;
             //string extn = fi.Extension;
 
+            //TODO: Fixa hårdkodade värden
             var name = "Olivia_Denbu_LIA-rapport_PROG17";
             var extn = "pdf";
-            var moduleId = 1;
+            var moduleId = 1009;
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -54,7 +55,7 @@ namespace ThesisProject.Data
                 try
                 {
                     command.Parameters.Add("@Name", SqlDbType.VarChar).Value = name;
-                    command.Parameters.Add("@Content", SqlDbType.VarBinary).Value = documentContent;
+                    command.Parameters.Add("@Content", SqlDbType.VarBinary,documentContent.Length).Value = documentContent;
                     command.Parameters.Add("@Extn", SqlDbType.VarChar).Value = extn;
                     command.Parameters.Add("@ModuleId", SqlDbType.Int).Value = moduleId;
 
@@ -70,10 +71,10 @@ namespace ThesisProject.Data
                 }
             }
         }
-      
+
         //TODO Fixa så filen går att öppna 
         //Laddar nu ner filen men öppnar ej
-        public void Download()
+        public byte[] GetFile()
         {
             var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
 
@@ -82,7 +83,42 @@ namespace ThesisProject.Data
                 var cmd = new SqlCommand("GetExamFileById", connection);
                 connection.Open();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = 1;
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = 12; //TODO fixa värdena (id för lagrade pdf)
+
+                byte[] myBytes = new byte[0];
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                reader.Read();
+                myBytes = (byte[])reader["Content"];
+                return myBytes;
+
+                //var fileName = reader["Name"].ToString();
+                //var extn = reader["extn"].ToString();
+                //var path = "C:\\Users\\" + fileName + "." + extn;
+
+
+                ////TODO: Byt ut C: till path
+                //using (StreamWriter stream = new StreamWriter("C:\\Users\\Olivia\\Desktop\\download.pdf"))
+                //{
+                //    BinaryWriter bw = new BinaryWriter(stream.BaseStream);
+                //    bw.Write(myBytes);
+
+                //}
+
+                //return myBytes;
+            }
+        }
+
+            public void Download()
+        {
+            var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                var cmd = new SqlCommand("GetExamFileById", connection);
+                connection.Open();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = 12; //TODO fixa värdena (id för lagrade pdf)
 
                 byte[] myBytes = new byte[0];
                 SqlDataReader reader = cmd.ExecuteReader();

@@ -80,20 +80,44 @@ namespace ThesisProject.Controllers
             return new FileContentResult(file, "application/pdf");
         }
 
-        public ActionResult Download(int fileId)
+        public ActionResult Download(int fileId, string pdfType, string fileName)
         {
             //TODO: Fixa connsträng
             //TODO: Fixa path
             //TODO: Fixa fråga vid download
 
             var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
-
+            
             using (var connection = new SqlConnection(connectionString))
             {
-                var file = _fileRepository.GetExamFile(fileId);
+                var file = new byte[0];
+
+                switch (pdfType)
+                {
+                    case "facts":
+                        file = _context.Facts
+                            .Where(f => f.Id == fileId)
+                            .Select(f => f.Content)
+                            .SingleOrDefault();
+                        break;
+                    case "exercises":
+                        file = _context.ExerciseFile
+                            .Where(f => f.Id == fileId)
+                            .Select(f => f.Content)
+                            .SingleOrDefault();
+                        break;
+                    case "exams":
+                        file = _context.ExamFile
+                            .Where(f => f.Id == fileId)
+                            .Select(f => f.Content)
+                            .SingleOrDefault();
+                        break;
+                    default:
+                        break;
+                }
 
                 //TODO: Byt ut C: till path
-                using (var stream = new StreamWriter("C:\\Users\\Olivia\\Desktop\\hejsan.pdf"))
+                using (var stream = new StreamWriter("C:\\Users\\Olivia\\Desktop\\" + fileName + "Test" + ".pdf"))
                 {
                     var bw = new BinaryWriter(stream.BaseStream);
                     bw.Write(file);

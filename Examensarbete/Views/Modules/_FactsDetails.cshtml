@@ -8,13 +8,14 @@
     <h4>
         <a asp-controller="Modules"
            asp-action="BrowsePdf"
-           asp-route-fileId="@facts.Id"
-           asp-route-pdfType="facts">@facts.Name</a>
+           asp-route-fileId="@facts.Id">@facts.Name</a>
     </h4>
 
     <a asp-controller="Modules"
        asp-action="Download"
-       asp-route-fileId="@facts.Id">Download</a>
+       asp-route-fileId="@facts.Id"
+       asp-route-pdfType="facts"
+       asp-route-fileName="@facts.Name">Download</a>
 
     <br />
     <br />

@@ -9,7 +9,7 @@ namespace ThesisProject.ViewModels
     public class ModuleViewModel
     {
         public string Name { get; set; }
-        public string Facts { get; set; }
+        public IEnumerable<Facts> Facts { get; set; }
         public IEnumerable<ExerciseFile> Exercises { get; set; }
         public IEnumerable<ExamFile> Exams { get; set; }
     }

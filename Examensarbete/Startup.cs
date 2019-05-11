@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using ThesisProject.Data;
 using ThesisProject.Models;
 
 namespace ThesisProject
@@ -45,45 +46,6 @@ namespace ThesisProject
             //Localization; Andrew
             services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
 
-            ////***********************************
-            ////Localisation: #2 START
-            ////***********************************
-            //services.AddLocalization();
-            ////Ev TODO lägga till AddMvc() här
-            //services.Configure<RequestLocalizationOptions>(
-            //    opts =>
-            //    {
-            //        var supportedCultures = new List<CultureInfo>
-            //        {
-            //            new CultureInfo("et"),
-            //            new CultureInfo("en"),
-            //            new CultureInfo("ru"),
-            //        };
-            //        opts.DefaultRequestCulture = new RequestCulture("et");
-            //        opts.SupportedCultures = supportedCultures;
-            //        opts.SupportedUICultures = supportedCultures;
-
-            //        //TODO: Kolla om rätt namespace på routeData
-            //        var provider = new RouteDataRequestCultureProvider();
-            //        provider.RouteDataStringKey = "lang";
-            //        provider.UIRouteDataStringKey = "lang";
-            //        provider.Options = opts;
-            //        opts.RequestCultureProviders = new[] { provider };
-            //    }
-            //);
-            ////TODO: RouteOptions rätt namespace(?)
-            //services.Configure<RouteOptions>(
-            //    options =>
-            //    {
-            //        options.ConstraintMap.Add("lang", typeof(LanguageRouteConstraint));
-            //    }
-            //);
-
-            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            ////***********************************
-            ////Localisation: #2 END
-            ////***********************************
-
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
             //Localization: Andrew
@@ -103,6 +65,7 @@ namespace ThesisProject
                         new CultureInfo("en"),
                         new CultureInfo("fr-FR"),
                         new CultureInfo("fr"),
+                        new CultureInfo("sv")
                     };
 
                     opts.DefaultRequestCulture = new RequestCulture("en-GB");
@@ -141,26 +104,6 @@ namespace ThesisProject
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            ////TODO: Ta bort om inte funkar
-            ////****************************
-            ////Localization #2
-            ////****************************
-            //var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-
-            //app.UseRequestLocalization(options.Value);
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "LocalizedDefault",
-            //        template: "{lang:lang}/{controller=Home}/{action=Index}/{id?}"
-            //    );
-
-            //    routes.MapRoute(
-            //        name: "default",
-            //        template: "{*catchall}",
-            //        defaults: new { controller = "Home", action = "RedirectToDefaultLanguage" });
-            //});
         }
     }
 }

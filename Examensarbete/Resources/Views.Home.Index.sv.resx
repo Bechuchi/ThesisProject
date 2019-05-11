@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Home Page" xml:space="preserve">
-    <value>Page d'acctueil</value>
+    <value>Start sida</value>
   </data>
   <data name="Module.Name.1" xml:space="preserve">
-    <value>Module 1: Introduction</value>
+    <value>Modul 1: Introduktion</value>
   </data>
   <data name="Module.Name.2" xml:space="preserve">
-    <value>Module 2: Variables</value>
+    <value>Modul 2: Variabler</value>
   </data>
   <data name="Programming for dummies" xml:space="preserve">
-    <value>Programmation pour des stupides</value>
+    <value>Programmering för dummies</value>
   </data>
 </root>

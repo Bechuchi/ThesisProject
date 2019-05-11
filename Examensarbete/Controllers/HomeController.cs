@@ -19,6 +19,7 @@ using iTextSharp.text;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Http;
+using ThesisProject.StrategyPattern;
 
 namespace ThesisProject.Controllers
 {
@@ -40,53 +41,6 @@ namespace ThesisProject.Controllers
             _localizer = localizer;
         }
 
-        //Localization #2
-        ////TODO: Ta bort om inte funkar
-        //private string CurrentLanguage
-        //{
-        //    get
-        //    {
-        //        if (!string.IsNullOrEmpty(_currentLanguage))
-        //        {
-        //            return _currentLanguage;
-        //        }
-
-        //        if (RouteData.Values.ContainsKey("lang"))
-        //        {
-        //            _currentLanguage = RouteData.Values["lang"].ToString().ToLower();
-
-        //            if (_currentLanguage == "ee")
-        //            {
-        //                _currentLanguage = "et";
-        //            }
-        //        }
-
-        //        if (string.IsNullOrEmpty(_currentLanguage))
-        //        {
-        //            var feature = HttpContext.Features.Get<IRequestCultureFeature>();
-
-        //            _currentLanguage = feature.RequestCulture.Culture.TwoLetterISOLanguageName.ToLower();
-        //        }
-
-        //        return _currentLanguage;
-        //        }
-        //    }
-
-
-        //Localization #2
-        ////TODO: Ta bort om inte funkar
-        //public ActionResult RedirectToDefaultLanguage()
-        //{
-        //    var lang = CurrentLanguage;
-
-        //    if (lang == "et")
-        //    {
-        //        lang = "ee";
-        //    }
-
-        //    return RedirectToAction("Index", new { lang = lang });
-        //}
-
         [HttpPost]
         public IActionResult SetLanguage(string culture, string returnUrl)
         {
@@ -101,14 +55,11 @@ namespace ThesisProject.Controllers
 
         public IActionResult Index()
         {
-            //Så jag har seedad med pdf
-            //FileSeeder sd = new FileSeeder(_context);
-            //sd.SeedDbWithExamFile();
-
-            //Download
-            var seeder = new FileSeeder(_context);
-            //seeder.GetFile();
-            seeder.Download();
+            //TODO: Move process of seeding
+            //var seeder = new FileSeeder(_context);
+            //seeder.SeedDbWithExerciseFile();
+            //seeder.SeedDbWithExamFile();
+            //seeder.SeedDbWithFactsFile();
 
             //TODO lägga i repo(?)
             var course = _context.Course
@@ -125,26 +76,6 @@ namespace ThesisProject.Controllers
             ViewData["MyTitle"] = _localizer["The localised title of my app!"];
 
             return View(viewModel);
-        }
-
-        //Denna kan göra så formatet av en PDF visas i browsern
-        //TODO: Få tag i filen från db
-        public ActionResult Pdf()
-        {
-            var path = "C:\\Users\\Olivia\\Desktop\\Olivia_Denbu_LIA-rapport_PROG17.pdf";
-
-            var fileStream = new FileStream(path,
-                                            FileMode.Open,
-                                            FileAccess.Read
-                                            );
-
-            var fsResult = new FileStreamResult(fileStream, "application/pdf");
-            //var fsResult = new FileStreamResult(fileStream, "application/pdf");
-            FileSeeder sd = new FileSeeder(_context);
-            var bytes = sd.GetFile();
-
-            return new FileContentResult(bytes, "application/pdf");
-            //return fsResult;
         }
 
         //TODO: Ta bort när pdf är fixat

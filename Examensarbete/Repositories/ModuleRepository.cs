@@ -20,15 +20,18 @@ namespace ThesisProject.Repositories
         {
             var modules = _context.Module
                 .Include(e => e.ExamFile)
-                .Where(m => m.FkCourseId == courseId)
+                .Where(m => m.CourseId == courseId)
                 .ToList();
 
             return modules;
         }
 
-        public Module GetModule(int moduleId)
+        public Module Get(int moduleId)
         {
             var module = _context.Module
+                .Include(e => e.ExamFile)
+                .Include(e => e.ExerciseFile)
+                .Include(f => f.Facts)
                 .SingleOrDefault(m => m.Id == moduleId);
 
             return module;

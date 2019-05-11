@@ -1,0 +1,21 @@
+﻿@model ThesisProject.ViewModels.ModuleViewModel
+
+<h2 style="font-weight: bold">@Model.Name</h2>
+<h4 style="font-weight: bold">Facts: </h4>
+
+@foreach (var facts in Model.Facts)
+{
+    <h4>
+        <a asp-controller="Modules"
+           asp-action="BrowsePdf"
+           asp-route-fileId="@facts.Id"
+           asp-route-pdfType="facts">@facts.Name</a>
+    </h4>
+
+    <a asp-controller="Modules"
+       asp-action="Download"
+       asp-route-fileId="@facts.Id">Download</a>
+
+    <br />
+    <br />
+}

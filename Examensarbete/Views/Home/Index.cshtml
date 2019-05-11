@@ -6,16 +6,6 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
 
-@*@{
-    ViewData["Title"] = "Home Page";
-}*@
-
-@{
-    ViewData["Title"] = Localizer["Home Page"];
-}
-
-<h2>@ViewData["Title"]</h2>
-
 <h1 style="font-weight: bold">@Localizer[Model.Name.ToString()]</h1>
 
 @* TODO: Add colors and buttons for modules *@
@@ -54,14 +44,17 @@
                     <div class="panel-body">
                         <h6>
                             @* TODO: Remove hard coding *@
-                            <a onclick="openModuleDetails(@module.Id)">Facts</a>
+                            <a onclick="openModuleDetails(@module.Id, 'facts')">Facts</a>
                         </h6>
                         <h6>
-                            <a onclick="openModuleDetails(@module.Id)">Exercises</a>
+                            <a onclick="openModuleDetails(@module.Id, 'exercises')">Exercises</a>
                         </h6>
                         <h6>
-                            @*<a onclick="openModuleDetails(@module.Id)">Exams</a>*@
-                            @Html.ActionLink("Exams", "pdf")
+                            <a onclick="openModuleDetails(@module.Id, 'exams')">Exams</a>
+                            @*@Html.ActionLink("Exams", "pdf")*@
+                            @*<a asp-controller="Details"
+                               asp-action="Download"
+                               asp-route-examId="12">Download</a>*@
                         </h6>
                     </div>
                 </div>
@@ -77,13 +70,14 @@
 @* TODO: object as in param, not id *@
 <script>
 
-    function openModuleDetails(id) {
+    function openModuleDetails(id, type) {
 
         var element = document.getElementById("currentModule");
 
         //var content = content;
         var id = id;
-        var sendData = { id: id }
+        var type = type;
+        var sendData = { id: id, type: type}
 
         $.ajax({
             type: "POST",

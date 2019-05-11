@@ -17,26 +17,90 @@ namespace ThesisProject.Controllers
     {
         private ThesisProjectDBContext _context;
         private ModuleRepository _moduleRepository;
+        private readonly FileRepository _fileRepository;
 
         public ModulesController(ThesisProjectDBContext context)
         {
             _context = context;
-            //TODO dependendy injecton
+            //TODO interface 
             _moduleRepository = new ModuleRepository(_context);
-        }
+            _fileRepository = new FileRepository(_context);
+    }
 
         [HttpPost]
-        public IActionResult Details(int id)
+        public IActionResult Details(int id, string type)
         {
-            var module = _moduleRepository.GetModule(id);
+            //TODO bryta ut Get include
+            var module = _moduleRepository.Get(id);
             var viewModel = new ModuleViewModel
             {
                 Name = module.Name,
-                Facts = module.Facts,
-                Exams = module.ExamFile.ToList()
-            };         
+                Facts = module.Facts.ToList(),
+                Exams = module.ExamFile.ToList(),
+                Exercises = module.ExerciseFile.ToList()
+            };
 
-            return PartialView("_Details", viewModel);
+            switch (type)
+            {
+                case "facts":
+                    return PartialView("_FactsDetails", viewModel);
+                case "exercises":
+                    return PartialView("_ExerciseDetails", viewModel);
+                case "exams":
+                    return PartialView("_ExamDetails", viewModel);
+                default:
+                    break;
+            }
+
+            //TODO: Är detta rätt för fel(?)
+            return View(viewModel);
+        }
+
+        public ActionResult BrowsePdf(int fileId, string pdfType)
+        {
+            string cmdText = "";
+
+            switch (pdfType)
+            {
+                case "facts":
+                    cmdText = "GetFactsFileById";
+                    break;
+                case "exercises":
+                    cmdText = "GetExerciseFileById";
+                    break;
+                case "exams":
+                    cmdText = "GetExamFileById";
+                    break;
+                default:
+                    break;
+            }
+          
+            var file = _fileRepository.GetCurrentFile(fileId, cmdText);
+
+            return new FileContentResult(file, "application/pdf");
+        }
+
+        public ActionResult Download(int fileId)
+        {
+            //TODO: Fixa connsträng
+            //TODO: Fixa path
+            //TODO: Fixa fråga vid download
+
+            var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var file = _fileRepository.GetExamFile(fileId);
+
+                //TODO: Byt ut C: till path
+                using (var stream = new StreamWriter("C:\\Users\\Olivia\\Desktop\\hejsan.pdf"))
+                {
+                    var bw = new BinaryWriter(stream.BaseStream);
+                    bw.Write(file);
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

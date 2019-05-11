@@ -72,75 +72,87 @@ namespace ThesisProject.Data
             }
         }
 
-        //TODO Fixa så filen går att öppna 
-        //Laddar nu ner filen men öppnar ej
-        public byte[] GetFile()
+        public void SeedDbWithExerciseFile()
         {
             var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                var cmd = new SqlCommand("GetExamFileById", connection);
-                connection.Open();
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = 12; //TODO fixa värdena (id för lagrade pdf)
+            var path = "C:\\Users\\Olivia\\Desktop\\Frågesport 1.pdf";
+            var fi = new FileInfo("Frågesport 1");
+            var documentContent = System.IO.File.ReadAllBytes(path);
 
-                byte[] myBytes = new byte[0];
-                SqlDataReader reader = cmd.ExecuteReader();
+            //string name = fi.Name;
+            //string extn = fi.Extension;
 
-                reader.Read();
-                myBytes = (byte[])reader["Content"];
-                return myBytes;
-
-                //var fileName = reader["Name"].ToString();
-                //var extn = reader["extn"].ToString();
-                //var path = "C:\\Users\\" + fileName + "." + extn;
-
-
-                ////TODO: Byt ut C: till path
-                //using (StreamWriter stream = new StreamWriter("C:\\Users\\Olivia\\Desktop\\download.pdf"))
-                //{
-                //    BinaryWriter bw = new BinaryWriter(stream.BaseStream);
-                //    bw.Write(myBytes);
-
-                //}
-
-                //return myBytes;
-            }
-        }
-
-            public void Download()
-        {
-            var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
+            //TODO: Fixa hårdkodade värden
+            var name = "Frågesport 1";
+            var extn = "pdf";
+            var moduleId = 1009;
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                var cmd = new SqlCommand("GetExamFileById", connection);
-                connection.Open();
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = 12; //TODO fixa värdena (id för lagrade pdf)
+                var command = new SqlCommand("SaveExerciseFile", connection);
+                command.CommandType = CommandType.StoredProcedure;
 
-                byte[] myBytes = new byte[0];
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                reader.Read();
-                myBytes = (byte[])reader["Content"];
-
-                var fileName = reader["Name"].ToString();
-                var extn = reader["extn"].ToString();
-                var path = "C:\\Users\\" + fileName + "." + extn;
-
-
-                //TODO: Byt ut C: till path
-                using (StreamWriter stream = new StreamWriter("C:\\Users\\Olivia\\Desktop\\download.pdf"))
+                try
                 {
-                    BinaryWriter bw = new BinaryWriter(stream.BaseStream);
-                    bw.Write(myBytes);
+                    command.Parameters.Add("@Name", SqlDbType.VarChar).Value = name;
+                    command.Parameters.Add("@Content", SqlDbType.VarBinary, documentContent.Length).Value = documentContent;
+                    command.Parameters.Add("@Extn", SqlDbType.VarChar).Value = extn;
+                    command.Parameters.Add("@ModuleId", SqlDbType.Int).Value = moduleId;
 
+                    connection.Open();
+                    command.ExecuteNonQuery();
                 }
-               
-                //return myBytes;
+                finally
+                {
+                    //TODO fixa så connection stängs
+                    var state = connection.State;
+                    connection.Close();
+                    state = connection.State;
+                }
             }
         }
+
+        public void SeedDbWithFactsFile()
+        {
+            var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
+
+            var path = "C:\\Users\\Olivia\\Desktop\\Module.1.Facts.pdf";
+            var fi = new FileInfo("Module.1.Facts");
+            var documentContent = System.IO.File.ReadAllBytes(path);
+
+            //string name = fi.Name;
+            //string extn = fi.Extension;
+
+            //TODO: Fixa hårdkodade värden
+            var name = "Module.1.Facts";
+            var extn = "pdf";
+            var moduleId = 1009;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand("SaveFactsFile", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    command.Parameters.Add("@Name", SqlDbType.VarChar).Value = name;
+                    command.Parameters.Add("@Content", SqlDbType.VarBinary, documentContent.Length).Value = documentContent;
+                    command.Parameters.Add("@Extn", SqlDbType.VarChar).Value = extn;
+                    command.Parameters.Add("@ModuleId", SqlDbType.Int).Value = moduleId;
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                finally
+                {
+                    //TODO fixa så connection stängs
+                    var state = connection.State;
+                    connection.Close();
+                    state = connection.State;
+                }
+            }
+        }
+
     }
 }

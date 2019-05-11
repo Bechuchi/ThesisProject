@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using ThesisProject.Data;
 using ThesisProject.Models;
 using ThesisProject.Repositories;
@@ -21,35 +25,6 @@ namespace ThesisProject.Controllers
             //TODO dependendy injecton
             _moduleRepository = new ModuleRepository(_context);
         }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        //TODO: Ta bort om ovan funkar (annars den här pdf som är bra)
-        public ActionResult Pdf()
-        {
-            //FileSeeder seeder = new FileSeeder(_context);
-            //var bytes = seeder.Download();
-
-            var path = "C:\\Users\\Olivia\\Desktop\\Olivia_Denbu_LIA-rapport_PROG17.pdf";
-            path = "C:\\Users\\Olivia\\Desktop\\Test Veckobrev 1.pdf";
-
-            var fileStream = new FileStream(path,
-                                     FileMode.Open,
-                                     FileAccess.Read
-                                   );
-
-            var fsResult = new FileStreamResult(fileStream, "application/pdf");
-            return fsResult;
-
-
-            //FileSeeder seeder = new FileSeeder(_context);
-            //var bytes = seeder.Download();
-
-            ////byte[] bytes = GetYourByteArrayForPDF();
-            //return File(bytes, "application/pdf", "somefriendlyname.pdf");
-        }
+        
     }
 }

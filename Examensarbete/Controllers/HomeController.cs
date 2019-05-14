@@ -20,6 +20,8 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Http;
 using ThesisProject.StrategyPattern;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace ThesisProject.Controllers
 {
@@ -39,6 +41,35 @@ namespace ThesisProject.Controllers
             //TODO dependendy injecton
             _moduleRepository = new ModuleRepository(_context);
             _localizer = localizer;
+        }
+
+        //TODO: Ta bort
+        public byte[] GetCurrentFile(int fileId, string cmdText)
+        {
+            var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var cmd = new SqlCommand(cmdText, connection);
+                connection.Open();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = fileId; //TODO fixa värdena (id för lagrade pdf)
+
+                byte[] myBytes = new byte[0];
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+
+                myBytes = (byte[])reader["Content"];
+
+                return myBytes;
+            }
+        }
+
+        public FileStreamResult GetPDF()
+        {
+            FileStream fs = new FileStream("C:\\Users\\Olivia\\Desktop\\Olivia_Denbu_LIA-rapport_PROG17.pdf", FileMode.Open, FileAccess.Read);
+            return File(fs, "application/pdf");
         }
 
         public IActionResult Index()

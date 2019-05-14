@@ -9,7 +9,7 @@
 <h1 style="font-weight: bold">@Localizer[Model.Name.ToString()]</h1>
 
 @* TODO: Add colors and buttons for modules *@
-@*<nav>
+<nav>
         @foreach (var module in Model.Modules)
         {
             if (module.Status == "TODO")
@@ -26,46 +26,46 @@
             }
         }
     </nav>
-    <br />*@
+    <br />
 
-<div id="wrapper" style="overflow: hidden">
-    <div id="accordion" style="float: left">
-        @foreach (var module in Model.Modules)
-        {
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4>
-                        <a href="#@module.Id" data-toggle="collapse" data-parent="#accordion">
-                            @Localizer[module.Name.ToString()]
-                         </a>
-                    </h4>
-                </div>
-                <div id="@module.Id" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <h6>
-                            @* TODO: Remove hard coding *@
-                            <a onclick="openModuleDetails(@module.Id, 'facts')">@Localizer["Module.Facts"]</a>
-                        </h6>
-                        <h6>
-                            <a onclick="openModuleDetails(@module.Id, 'exercises')">@Localizer["Module.Exercises"]</a>
-                        </h6>
-                        <h6>
-                            <a onclick="openModuleDetails(@module.Id, 'exams')">@Localizer["Module.Exams"]</a>
-                        </h6>
+    <div id="wrapper" style="overflow: hidden">
+        <div id="accordion" style="float: left">
+            @foreach (var module in Model.Modules)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>
+                            <a href="#@module.Id" data-toggle="collapse" data-parent="#accordion">
+                                @Localizer[module.Name.ToString()]
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="@module.Id" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <h6>
+                                @* TODO: Remove hard coding *@
+                                <a onclick="openModuleDetails(@module.Id, 'facts')">@Localizer["Module.Facts"]</a>
+                            </h6>
+                            <h6>
+                                <a onclick="openModuleDetails(@module.Id, 'exercises')">@Localizer["Module.Exercises"]</a>
+                            </h6>
+                            <h6>
+                                <a onclick="openModuleDetails(@module.Id, 'exams')">@Localizer["Module.Exams"]</a>
+                            </h6>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
-    <div id="currentModule" style="float:right; width: 650px">
+            }
+        </div>
 
+        <div id="currentModule" style="float:right; width: 750px">
+
+        </div>
     </div>
-</div>
 
 
 @* TODO: object as in param, not id *@
 <script>
-
     function openModuleDetails(id, type) {
 
         var element = document.getElementById("currentModule");

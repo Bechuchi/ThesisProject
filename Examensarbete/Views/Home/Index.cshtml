@@ -4,10 +4,18 @@
     ViewData["Title"] = "Start";
 }
 
+
+
 @* TODO: Ta bort hårdkodning *@
 <h2>@Model.Heading</h2>
 <br />
 
 <div style="width: 400px">
     <p>@Model.AboutUs</p>
+</div>
+
+<div class="PDF">
+    <object data="Home/GetPDF/1?GetFactsFileById" type="application/pdf" width="750" height="600">
+        alt : <a href="kth.txt">PROG17_Examensarbete_170512.pdf</a>
+    </object>
 </div>

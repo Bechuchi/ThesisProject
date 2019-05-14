@@ -25,11 +25,20 @@ namespace ThesisProject.Controllers
             //TODO interface 
             _moduleRepository = new ModuleRepository(_context);
             _fileRepository = new FileRepository(_context);
-    }
+        }
+
+        public FileStreamResult GetPDF()
+        {
+            FileStream fs = new FileStream("C:\\Users\\Olivia\\Desktop\\Olivia_Denbu_LIA-rapport_PROG17.pdf", FileMode.Open, FileAccess.Read);
+
+            return File(fs, "application/pdf");
+        }
 
         [HttpPost]
         public IActionResult Details(int id, string type)
         {
+            FileStream fs = new FileStream("C:\\Users\\Olivia\\Desktop\\Olivia_Denbu_LIA-rapport_PROG17.pdf", FileMode.Open, FileAccess.Read);
+
             //TODO bryta ut Get include
             var module = _moduleRepository.Get(id);
             var viewModel = new ModuleViewModel
@@ -37,12 +46,14 @@ namespace ThesisProject.Controllers
                 Name = module.Name,
                 Facts = module.Facts.ToList(),
                 Exams = module.ExamFile.ToList(),
-                Exercises = module.ExerciseFile.ToList()
-            };
+                Exercises = module.ExerciseFile.ToList(),
+                CurrentPDF = _fileRepository.GetCurrentFile(1, "GetFactsFileById")
+        };
 
             switch (type)
             {
                 case "facts":
+                    //return File(fs, "application/pdf");
                     return PartialView("_FactsDetails", viewModel);
                 case "exercises":
                     return PartialView("_ExerciseDetails", viewModel);

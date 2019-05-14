@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -30,7 +32,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">@Localizer["TopNavigation.Home"]</a></li>
                 </ul>
             </div>
         </div>
@@ -47,7 +49,7 @@
                     <p>&copy; 2019 - ThesisProject</p>
                 </div>
                 <div class="col-sm-6 text-right">
-                    @await Html.PartialAsync("_SelectLanguagePartial")
+                    @await Html.PartialAsync("_SelectLanguage")
                 </div>
             </div>
         </footer>

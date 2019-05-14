@@ -120,11 +120,20 @@
   <data name="Home Page" xml:space="preserve">
     <value>Page d'acctueil</value>
   </data>
+  <data name="Module.Exams" xml:space="preserve">
+    <value>Des Examas</value>
+  </data>
+  <data name="Module.Exercises" xml:space="preserve">
+    <value>Des Exercises</value>
+  </data>
+  <data name="Module.Facts" xml:space="preserve">
+    <value>Réalités</value>
+  </data>
   <data name="Module.Name.1" xml:space="preserve">
-    <value>Module 1: Introduction</value>
+    <value>Module 1: L'introduction</value>
   </data>
   <data name="Module.Name.2" xml:space="preserve">
-    <value>Module 2: Variables</value>
+    <value>Module 2: Des variables</value>
   </data>
   <data name="Programming for dummies" xml:space="preserve">
     <value>Programmation pour des stupides</value>

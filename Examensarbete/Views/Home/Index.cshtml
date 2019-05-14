@@ -44,13 +44,13 @@
                     <div class="panel-body">
                         <h6>
                             @* TODO: Remove hard coding *@
-                            <a onclick="openModuleDetails(@module.Id, 'facts')">Facts</a>
+                            <a onclick="openModuleDetails(@module.Id, 'facts')">@Localizer["Module.Facts"]</a>
                         </h6>
                         <h6>
-                            <a onclick="openModuleDetails(@module.Id, 'exercises')">Exercises</a>
+                            <a onclick="openModuleDetails(@module.Id, 'exercises')">@Localizer["Module.Exercises"]</a>
                         </h6>
                         <h6>
-                            <a onclick="openModuleDetails(@module.Id, 'exams')">Exams</a>
+                            <a onclick="openModuleDetails(@module.Id, 'exams')">@Localizer["Module.Exams"]</a>
                             @*@Html.ActionLink("Exams", "pdf")*@
                             @*<a asp-controller="Details"
                                asp-action="Download"

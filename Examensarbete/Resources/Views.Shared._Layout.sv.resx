@@ -117,25 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Home Page" xml:space="preserve">
-    <value>Home</value>
-  </data>
-  <data name="Module.Exams" xml:space="preserve">
-    <value>Exams</value>
-  </data>
-  <data name="Module.Exercises" xml:space="preserve">
-    <value>Exercises</value>
-  </data>
-  <data name="Module.Facts" xml:space="preserve">
-    <value>Facts</value>
-  </data>
-  <data name="Module.Name.1" xml:space="preserve">
-    <value>Module 1: Introduction</value>
-  </data>
-  <data name="Module.Name.2" xml:space="preserve">
-    <value>Module 2: Variables</value>
-  </data>
-  <data name="Programming for dummies" xml:space="preserve">
-    <value>Programming for dummies</value>
+  <data name="TopNavigation.Home" xml:space="preserve">
+    <value>Hem</value>
   </data>
 </root>

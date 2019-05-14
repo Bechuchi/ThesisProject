@@ -120,6 +120,15 @@
   <data name="Home Page" xml:space="preserve">
     <value>Start sida</value>
   </data>
+  <data name="Module.Exams" xml:space="preserve">
+    <value>Prov</value>
+  </data>
+  <data name="Module.Exercises" xml:space="preserve">
+    <value>Övningar</value>
+  </data>
+  <data name="Module.Facts" xml:space="preserve">
+    <value>Fakta</value>
+  </data>
   <data name="Module.Name.1" xml:space="preserve">
     <value>Modul 1: Introduktion</value>
   </data>

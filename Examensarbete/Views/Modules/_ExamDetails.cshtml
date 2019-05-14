@@ -1,7 +1,10 @@
 ﻿@model ThesisProject.ViewModels.ModuleViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
-<h2 style="font-weight: bold">@Model.Name</h2>
-<h4 style="font-weight: bold">Exams: </h4>
+@*<h2 style="font-weight: bold">@Model.Name</h2>*@
+<h2 style="font-weight: bold">@Localizer["Module.Name.1"]</h2>
+<h4 style="font-weight: bold">@Localizer["Txt.Tests"]</h4>
 
 @foreach (var exam in Model.Exams)
 {

@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ThesisProject.Models
 {
-    public partial class ThesisProjectDBContext : DbContext
+    //TODO: Fråga Dahl om jag kan gör så
+    public partial class ThesisProjectDBContext : /*IdentityDbContext<ApplicationUser>*/ DbContext
     {
         public ThesisProjectDBContext()
         {

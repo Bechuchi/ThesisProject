@@ -32,7 +32,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @* TODO: Ta bort hårdkodning *@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">@Localizer["TopNavigation.Home"]</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Course">@Localizer["TopNavigation.Courses"]</a></li>
                 </ul>
             </div>
         </div>

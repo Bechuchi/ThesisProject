@@ -123,7 +123,7 @@ namespace ThesisProject.Controllers
                     bw.Write(file);
                 }
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Course", "Home");
             }
         }
     }

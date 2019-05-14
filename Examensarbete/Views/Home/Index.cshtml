@@ -1,92 +1,13 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
-@model ThesisProject.ViewModels.CourseViewModel
-@inject IViewLocalizer Localizer
-@*@inject CustomLocalizer localizer*@
+﻿@model ThesisProject.ViewModels.IndexViewModel
 
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
+@{
+    ViewData["Title"] = "Start";
+}
 
-<h1 style="font-weight: bold">@Localizer[Model.Name.ToString()]</h1>
+@* TODO: Ta bort hårdkodning *@
+<h2>@Model.Heading</h2>
+<br />
 
-@* TODO: Add colors and buttons for modules *@
-@*<nav>
-        @foreach (var module in Model.Modules)
-        {
-            if (module.Status == "TODO")
-            {
-                <button class="btn btn-danger disabled">@module.Name</button>
-            }
-            else if (module.Status == "In progress")
-            {
-                <button class="btn btn-warning active">@module.Name</button>
-            }
-            else
-            {
-                <button class="btn btn-success disabled">@module.Name</button>
-            }
-        }
-    </nav>
-    <br />*@
-
-<div id="wrapper" style="overflow: hidden">
-    <div id="accordion" style="float: left">
-        @foreach (var module in Model.Modules)
-        {
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4>
-                        <a href="#@module.Id" data-toggle="collapse" data-parent="#accordion">
-                            @Localizer[module.Name.ToString()]
-                         </a>
-                    </h4>
-                </div>
-                <div id="@module.Id" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <h6>
-                            @* TODO: Remove hard coding *@
-                            <a onclick="openModuleDetails(@module.Id, 'facts')">@Localizer["Module.Facts"]</a>
-                        </h6>
-                        <h6>
-                            <a onclick="openModuleDetails(@module.Id, 'exercises')">@Localizer["Module.Exercises"]</a>
-                        </h6>
-                        <h6>
-                            <a onclick="openModuleDetails(@module.Id, 'exams')">@Localizer["Module.Exams"]</a>
-                            @*@Html.ActionLink("Exams", "pdf")*@
-                            @*<a asp-controller="Details"
-                               asp-action="Download"
-                               asp-route-examId="12">Download</a>*@
-                        </h6>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-    <div id="currentModule" style="float:right; width: 650px">
-
-    </div>
+<div style="width: 400px">
+    <p>@Model.AboutUs</p>
 </div>
-
-
-@* TODO: object as in param, not id *@
-<script>
-
-    function openModuleDetails(id, type) {
-
-        var element = document.getElementById("currentModule");
-
-        //var content = content;
-        var id = id;
-        var type = type;
-        var sendData = { id: id, type: type}
-
-        $.ajax({
-            type: "POST",
-            url: "@Url.Action("Details", "Modules")",
-            data: sendData,
-            success: function (data) {
-                element.innerHTML = data
-            },
-            traditional: true
-        });
-    }
-</script>

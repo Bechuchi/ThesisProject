@@ -6,7 +6,10 @@
 <h2 style="font-weight: bold">@Localizer["Module.Name.1"]</h2>
 <h4 style="font-weight: bold">@Localizer["Txt.Tests"]</h4>
 
-@foreach (var exam in Model.Exams)
+@* TODO: Fixa id *@
+<embed src="@Url.Action( "BrowsePdf", "Modules", new { fileId = 14, pdfType = "exams" } )" width="700" height="400" />
+
+@*@foreach (var exam in Model.Exams)
 {
     <h4>
         <a asp-controller="Modules"
@@ -23,4 +26,4 @@
 
     <br />
     <br />
-}
+}*@

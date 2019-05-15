@@ -154,5 +154,46 @@ namespace ThesisProject.Data
             }
         }
 
+        public void SeedDbWithImage()
+        {
+            var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
+
+            var path = "C:\\Users\\Olivia\\Desktop\\rainbow.jpg";
+            var fi = new FileInfo("rainbow");
+            var documentContent = System.IO.File.ReadAllBytes(path);
+
+            //string name = fi.Name;
+            //string extn = fi.Extension;
+
+            //TODO: Fixa hårdkodade värden
+            var name = "rainbow";
+            var extn = "jpg";
+            var moduleId = 1009;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand("SaveImage", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    command.Parameters.Add("@Name", SqlDbType.VarChar).Value = name;
+                    command.Parameters.Add("@Content", SqlDbType.VarBinary, documentContent.Length).Value = documentContent;
+                    command.Parameters.Add("@Extn", SqlDbType.VarChar).Value = extn;
+                    command.Parameters.Add("@ModuleId", SqlDbType.Int).Value = moduleId;
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                finally
+                {
+                    //TODO fixa så connection stängs
+                    var state = connection.State;
+                    connection.Close();
+                    state = connection.State;
+                }
+            }
+        }
+
     }
 }

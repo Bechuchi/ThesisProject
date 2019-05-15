@@ -7,6 +7,7 @@ namespace ThesisProject.Repositories
 {
     public interface IFileRepository
     {
-        byte[] GetFile(int id, string storedProcedure);
+        byte[] GetExamFile(int id);
+        byte[] GetCurrentFile(int fileId, string cmdText);
     }
 }

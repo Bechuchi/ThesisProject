@@ -69,7 +69,8 @@ namespace ThesisProject.Controllers
         public IActionResult Course()
         {
             //TODO: Move process of seeding
-            //var seeder = new FileSeeder(_context);
+            var seeder = new FileSeeder(_context);
+            seeder.SeedDbWithImage();
             //seeder.SeedDbWithExerciseFile();
             //seeder.SeedDbWithExamFile();
             //seeder.SeedDbWithFactsFile();

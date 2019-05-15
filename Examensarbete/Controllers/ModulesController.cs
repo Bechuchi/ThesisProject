@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using ThesisProject.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-using System.Data;
-using System.Data.SqlClient;
-using ThesisProject.Data;
 using ThesisProject.Models;
 using ThesisProject.Repositories;
+using ThesisProject.ViewModels;
 
 namespace ThesisProject.Controllers
 {
@@ -27,18 +22,17 @@ namespace ThesisProject.Controllers
             _fileRepository = new FileRepository(_context);
         }
 
-        public FileStreamResult GetPDF()
-        {
-            FileStream fs = new FileStream("C:\\Users\\Olivia\\Desktop\\Olivia_Denbu_LIA-rapport_PROG17.pdf", FileMode.Open, FileAccess.Read);
+        //public FileStreamResult GetPDF()
+        //{
+        //    FileStream fs = new FileStream("C:\\Users\\Olivia\\Desktop\\Olivia_Denbu_LIA-rapport_PROG17.pdf", FileMode.Open, FileAccess.Read);
 
-            return File(fs, "application/pdf");
-        }
+        //    return File(fs, "application/pdf");
+        //}
+
 
         [HttpPost]
         public IActionResult Details(int id, string type)
         {
-            FileStream fs = new FileStream("C:\\Users\\Olivia\\Desktop\\Olivia_Denbu_LIA-rapport_PROG17.pdf", FileMode.Open, FileAccess.Read);
-
             //TODO bryta ut Get include
             var module = _moduleRepository.Get(id);
             var viewModel = new ModuleViewModel
@@ -48,7 +42,7 @@ namespace ThesisProject.Controllers
                 Exams = module.ExamFile.ToList(),
                 Exercises = module.ExerciseFile.ToList(),
                 CurrentPDF = _fileRepository.GetCurrentFile(1, "GetFactsFileById")
-        };
+            };
 
             switch (type)
             {
@@ -67,6 +61,12 @@ namespace ThesisProject.Controllers
             return View(viewModel);
         }
 
+        public ActionResult DisplayImage()
+        {
+            var image = _fileRepository.GetCurrentFile(2, "GetImageById");
+
+            return new FileContentResult(image, "application/jpg");
+        }
         public ActionResult BrowsePdf(int fileId, string pdfType)
         {
             string cmdText = "";
@@ -85,7 +85,7 @@ namespace ThesisProject.Controllers
                 default:
                     break;
             }
-          
+
             var file = _fileRepository.GetCurrentFile(fileId, cmdText);
 
             return new FileContentResult(file, "application/pdf");
@@ -98,7 +98,7 @@ namespace ThesisProject.Controllers
             //TODO: Fixa fråga vid download
 
             var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
-            
+
             using (var connection = new SqlConnection(connectionString))
             {
                 var file = new byte[0];

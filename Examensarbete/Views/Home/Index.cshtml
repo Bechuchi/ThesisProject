@@ -1,21 +1,26 @@
-﻿@model ThesisProject.ViewModels.IndexViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model ThesisProject.ViewModels.IndexViewModel
+@inject IViewLocalizer Localizer
 
 @{
     ViewData["Title"] = "Start";
 }
-
-
-
-@* TODO: Ta bort hårdkodning *@
-<h2>@Model.Heading</h2>
 <br />
 
+<img src="@Url.Action( "DisplayImage", "Modules" )" width="700" height="400" />
+
+<h2>@Localizer["StartPage.Information.Header"]</h2>
+
 <div style="width: 400px">
-    <p>@Model.AboutUs</p>
+
+    <h4>Facts:</h4>
+    <p>@Localizer["StartPage.Information.Facts.Parapragh"]</p>
+
+    <h4>Exercises:</h4>
+    <p>@Localizer["StartPage.Information.Exercises.Parapragh"]</p>
+
+
+    <h4>Tests:</h4>
+    <p>@Localizer["StartPage.Information.Tests.Parapragh"]</p>
 </div>
 
-@*<div class="PDF">
-    <object data="Home/GetPDF/1?GetFactsFileById" type="application/pdf" width="750" height="600">
-        alt : <a href="kth.txt">PROG17_Examensarbete_170512.pdf</a>
-    </object>
-</div>*@

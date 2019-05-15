@@ -3,7 +3,10 @@
 <h2 style="font-weight: bold">@Model.Name</h2>
 <h4 style="font-weight: bold">Exercises: </h4>
 
-@foreach (var exercise in Model.Exercises)
+@* TODO: Fixa hårdkodat id *@
+<embed src="@Url.Action( "BrowsePdf", "Modules", new { fileId = 1, pdfType = "exercises" } )" width="700" height="400" />
+
+@*@foreach (var exercise in Model.Exercises)
 {
     <h4>
         <a asp-controller="Modules"
@@ -20,4 +23,4 @@
 
     <br />
     <br />
-}
+}*@

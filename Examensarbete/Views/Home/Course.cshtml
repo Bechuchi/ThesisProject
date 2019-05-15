@@ -9,7 +9,7 @@
 <h1 style="font-weight: bold">@Localizer[Model.Name.ToString()]</h1>
 
 @* TODO: Add colors and buttons for modules *@
-<nav>
+@*<nav>
         @foreach (var module in Model.Modules)
         {
             if (module.Status == "TODO")
@@ -25,7 +25,7 @@
                 <button class="btn btn-success disabled">@module.Name</button>
             }
         }
-    </nav>
+    </nav>*@
     <br />
 
     <div id="wrapper" style="overflow: hidden">
@@ -41,24 +41,71 @@
                         </h4>
                     </div>
                     <div id="@module.Id" class="panel-collapse collapse">
+                        
                         <div class="panel-body">
-                            <h6>
-                                @* TODO: Remove hard coding *@
-                                <a onclick="openModuleDetails(@module.Id, 'facts')">@Localizer["Module.Facts"]</a>
-                            </h6>
-                            <h6>
-                                <a onclick="openModuleDetails(@module.Id, 'exercises')">@Localizer["Module.Exercises"]</a>
-                            </h6>
-                            <h6>
-                                <a onclick="openModuleDetails(@module.Id, 'exams')">@Localizer["Module.Exams"]</a>
-                            </h6>
+                            
+                            <div id="accordionSec">
+                                @{ 
+                                    string sectionType = "";
+                                    string paramm = "";
+
+                                    for (int i = 0; i < 3; i++)
+                                    {
+                                        switch (i)
+                                        {
+                                            case 0:
+                                                sectionType = "Module.Facts";
+                                                paramm = "facts";
+                                                break;
+                                            case 1:
+                                                sectionType = "Module.Exercises";
+                                                paramm = "exercises";
+                                                break;
+                                            case 3:
+                                                sectionType = "Module.Exams";
+                                                paramm = "exams";
+                                                break;
+                                            default:
+                                                break;
+                                        }
+
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <a href="#@i" data-toggle="collapse" data-parent="accordionSec">@Localizer[sectionType]</a>
+                                            </div>
+                                            <div id="@i" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    @if (i == 0)
+                                                    {
+                                                        <h6><a onclick="openModuleDetails(@module.Id, 'facts')">Fakta 1</a></h6>
+                                                        <h6><a onclick="openModuleDetails(@module.Id, 'facts')">Fakta 2</a></h6>
+                                                    }
+                                                    else if (i == 1)
+                                                    {
+                                                        <h6><a onclick="openModuleDetails(@module.Id, 'exercises')">Övning 1</a></h6>
+                                                        <h6><a onclick="openModuleDetails(@module.Id, 'exercises')">Övning 1</a></h6>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h6><a onclick="openModuleDetails(@module.Id, 'exams')">Prov 1</a></h6>
+                                                        <h6><a onclick="openModuleDetails(@module.Id, 'exams')">Prov 1</a></h6>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                            
+                                        }
+                                    }
+                            </div>
+
                         </div>
+
                     </div>
-                </div>
+                </div> 
             }
         </div>
 
-        <div id="currentModule" style="float:right; width: 750px">
+        <div id="currentModule" style="float: right">
 
         </div>
     </div>
@@ -66,6 +113,7 @@
 
 @* TODO: object as in param, not id *@
 <script>
+  
     function openModuleDetails(id, type) {
 
         var element = document.getElementById("currentModule");
@@ -76,11 +124,11 @@
         var sendData = { id: id, type: type}
 
         $.ajax({
-            type: "POST",
+                                    type: "POST",
             url: "@Url.Action("Details", "Modules")",
             data: sendData,
             success: function (data) {
-                element.innerHTML = data
+                                            element.innerHTML = data
             },
             traditional: true
         });

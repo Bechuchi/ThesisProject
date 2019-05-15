@@ -3,6 +3,7 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #333333;
 }
 
 /* Wrapping element */
@@ -34,4 +35,46 @@ body {
     .carousel-caption {
         display: none;
     }
+}
+
+.big-container {
+    background-color: #ffffff;
+    width: 80%;
+    margin: auto;
+    min-height: 550px;
+}
+
+.navbar-fixed-top, .navbar-fixed-bottom {
+    width: 80% !important;
+    margin: auto !important;
+    background-color: #660066;
+    color: white;
+}
+
+.progress-nav{
+    margin-left: 240px;
+}
+
+.facts-details-container{
+    margin-right: 200px;
+}
+
+footer {
+    height: 50px;
+    width: 80%;
+    margin: auto;
+    background-color: #ffffff;
+    padding-top: 35px;
+    padding-bottom: 35px;
+}
+
+footer p{
+    margin-left: 35px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 35px;
+    margin-top: 35px;
+    color: #660066;
 }

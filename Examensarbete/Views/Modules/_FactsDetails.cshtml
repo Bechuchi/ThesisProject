@@ -1,7 +1,9 @@
 ﻿@model ThesisProject.ViewModels.ModuleViewModel
 
+<link href="~/css/site.css" rel="stylesheet" />
+
 @* TODO: Fixa fileId och facts så de inte är hårdkodade *@
-<embed src="@Url.Action( "BrowsePdf", "Modules", new { fileId = 1, pdfType = "facts" } )" width="700" height="400" />
+<embed class="facts-details-container" src="@Url.Action( "BrowsePdf", "Modules", new { fileId = 1, pdfType = "facts" } )" width="700" height="400" />
 
 @*@foreach (var facts in Model.Facts)
 {

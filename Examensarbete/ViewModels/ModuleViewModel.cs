@@ -10,10 +10,11 @@ namespace ThesisProject.ViewModels
 {
     public class ModuleViewModel
     {
+        public string pdfType { get; set; }
+
         public string Name { get; set; }
         public IEnumerable<Facts> Facts { get; set; }
         public IEnumerable<ExerciseFile> Exercises { get; set; }
         public IEnumerable<ExamFile> Exams { get; set; }
-        public byte[] CurrentPDF { get; set; }
     }
 }

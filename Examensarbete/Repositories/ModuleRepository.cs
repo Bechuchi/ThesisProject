@@ -19,7 +19,9 @@ namespace ThesisProject.Repositories
         public IEnumerable<Module> GetModulesForCourse(int courseId)
         {
             var modules = _context.Module
-                .Include(e => e.ExamFile)
+                .Include(m => m.Facts)
+                .Include(m => m.ExerciseFile)
+                .Include(m => m.ExamFile)
                 .Where(m => m.CourseId == courseId)
                 .ToList();
 

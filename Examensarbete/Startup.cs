@@ -42,7 +42,8 @@ namespace ThesisProject
             });
 
             services.AddDbContext<ThesisProjectDBContext>(options =>
-                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             //Localization; Andrew
             services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
 

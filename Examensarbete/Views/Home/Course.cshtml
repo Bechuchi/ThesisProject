@@ -1,7 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @model ThesisProject.ViewModels.CourseViewModel
 @inject IViewLocalizer Localizer
-@*@inject CustomLocalizer localizer*@
 
 <link href="~/css/site.css" rel="stylesheet" />
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
@@ -79,18 +78,25 @@
                                             <div class="panel-body">
                                                 @if (i == 0)
                                                 {
-                                                    <h6><a onclick="openModuleDetails(@module.Id, 'facts')">Fakta 1</a></h6>
-                                                    <h6><a onclick="openModuleDetails(@module.Id, 'facts')">Fakta 2</a></h6>
+                                                    @foreach (var f in module.Facts.ToList())
+                                                    {
+                                                        <h6><a onclick="openModuleDetails(@f.Id, 'facts')">@f.Name</a></h6>
+                                                    }
+
                                                 }
                                                 else if (i == 1)
                                                 {
-                                                    <h6><a onclick="openModuleDetails(@module.Id, 'exercises')">Övning 1</a></h6>
-                                                    <h6><a onclick="openModuleDetails(@module.Id, 'exercises')">Övning 1</a></h6>
+                                                    @foreach (var e in module.ExerciseFile.ToList())
+                                                    {
+                                                        <h6><a onclick="openModuleDetails(@e.Id, 'exercises')">@e.Name</a></h6>
+                                                    }
                                                 }
                                                 else if (i == 2)
                                                 {
-                                                    <h6><a onclick="openModuleDetails(@module.Id, 'exams')">Prov 1</a></h6>
-                                                    <h6><a onclick="openModuleDetails(@module.Id, 'exams')">Prov 1</a></h6>
+                                                    @foreach (var e in module.ExamFile.ToList())
+                                                    {
+                                                        <h6><a onclick="openModuleDetails(@e.Id, 'exams')">@e.Name</a></h6>
+                                                    }
                                                 }
                                             </div>
                                         </div>

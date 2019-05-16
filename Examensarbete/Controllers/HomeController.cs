@@ -70,7 +70,7 @@ namespace ThesisProject.Controllers
         {
             //TODO: Move process of seeding
             var seeder = new FileSeeder(_context);
-            seeder.SeedDbWithImage();
+            //seeder.SeedDbWithImage();
             //seeder.SeedDbWithExerciseFile();
             //seeder.SeedDbWithExamFile();
             //seeder.SeedDbWithFactsFile();
@@ -80,7 +80,7 @@ namespace ThesisProject.Controllers
                 .FirstOrDefault();
 
             var modules = _moduleRepository.GetModulesForCourse(course.Id); ;
-
+            
             var viewModel = new CourseViewModel
             {
                 Name = course.Name,

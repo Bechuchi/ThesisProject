@@ -22,44 +22,52 @@ namespace ThesisProject.Controllers
             _fileRepository = new FileRepository(_context);
         }
 
-        //public FileStreamResult GetPDF()
-        //{
-        //    FileStream fs = new FileStream("C:\\Users\\Olivia\\Desktop\\Olivia_Denbu_LIA-rapport_PROG17.pdf", FileMode.Open, FileAccess.Read);
-
-        //    return File(fs, "application/pdf");
-        //}
-
-
         [HttpPost]
         public IActionResult Details(int id, string type)
         {
-            //TODO bryta ut Get include
-            var module = _moduleRepository.Get(id);
-            var viewModel = new ModuleViewModel
+            var viewModel = new DetailsViewModel
             {
-                Name = module.Name,
-                Facts = module.Facts.ToList(),
-                Exams = module.ExamFile.ToList(),
-                Exercises = module.ExerciseFile.ToList(),
-                CurrentPDF = _fileRepository.GetCurrentFile(1, "GetFactsFileById")
+                PdfType = type,
+                FileId = id
             };
 
-            switch (type)
-            {
-                case "facts":
-                    //return File(fs, "application/pdf");
-                    return PartialView("_FactsDetails", viewModel);
-                case "exercises":
-                    return PartialView("_ExerciseDetails", viewModel);
-                case "exams":
-                    return PartialView("_ExamDetails", viewModel);
-                default:
-                    break;
-            }
+            //TODO bryta ut Get include
+            //var module = _moduleRepository.Get(id);
 
-            //TODO: Är detta rätt för fel(?)
-            return View(viewModel);
+            return PartialView("_Details", viewModel);
         }
+
+
+        //[HttpPost]
+        //public IActionResult Details(int id, string type)
+        //{
+        //    //TODO bryta ut Get include
+        //    var module = _moduleRepository.Get(id);
+        //    var viewModel = new ModuleViewModel
+        //    {
+        //        Name = module.Name,
+        //        Facts = module.Facts.ToList(),
+        //        Exams = module.ExamFile.ToList(),
+        //        Exercises = module.ExerciseFile.ToList(),
+        //        CurrentPDF = _fileRepository.GetCurrentFile(1, "GetFactsFileById")
+        //    };
+
+        //    switch (type)
+        //    {
+        //        case "facts":
+        //            //return File(fs, "application/pdf");
+        //            return PartialView("_FactsDetails", viewModel);
+        //        case "exercises":
+        //            return PartialView("_ExerciseDetails", viewModel);
+        //        case "exams":
+        //            return PartialView("_ExamDetails", viewModel);
+        //        default:
+        //            break;
+        //    }
+
+        //    //TODO: Fel måste fixas
+        //    return View(viewModel);
+        //}
 
         public ActionResult DisplayImage()
         {
@@ -67,6 +75,7 @@ namespace ThesisProject.Controllers
 
             return new FileContentResult(image, "application/jpg");
         }
+
         public ActionResult BrowsePdf(int fileId, string pdfType)
         {
             string cmdText = "";

@@ -2,5 +2,12 @@
 
 @* TODO: Ta bort *@
 @*<link href="~/css/site.css" rel="stylesheet" />*@
+<link href="~/css/site.css" rel="stylesheet" />
 
 <embed class="facts-details-container" src="@Url.Action( "BrowsePdf", "Modules", new { fileId = Model.FileId, pdfType = Model.PdfType } )" width="700" height="400" />
+
+<a asp-controller="Modules"
+   asp-action="Download"
+   asp-route-fileId="14" 
+   asp-route-pdfType="exams"
+   asp-route-fileName="OliviaTest">Download</a>

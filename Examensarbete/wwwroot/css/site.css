@@ -39,24 +39,31 @@ body {
 
 .big-container {
     background-color: #ffffff;
-    width: 80%;
+    width: 80%; 
     margin: auto;
     min-height: 550px;
 }
 
 .navbar-fixed-top, .navbar-fixed-bottom {
-    width: 80% !important;
+    /*width: 80% !important;*/
     margin: auto !important;
     background-color: #660066;
     color: white;
 }
 
-.progress-nav{
+.progress-nav {
     margin-left: 240px;
+    margin-bottom: 20px;
 }
 
-.facts-details-container{
-    margin-right: 200px;
+#accordion{
+    width: 20%;
+}
+
+.facts-details-container {
+    /*margin-right: 120px;*/
+    margin-left: 50px;
+    width: 70%;
 }
 
 footer {

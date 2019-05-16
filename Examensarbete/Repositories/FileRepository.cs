@@ -62,5 +62,35 @@ namespace ThesisProject.Repositories
             }
         }
 
+        public byte[] GetFileToDownload(int fileId, string pdfType)
+        {
+            var file = new byte[0];
+
+            switch (pdfType)
+            {
+                case "facts":
+                    file = _context.Facts
+                        .Where(f => f.Id == fileId)
+                        .Select(f => f.Content)
+                        .SingleOrDefault();
+                    break;
+                case "exercises":
+                    file = _context.ExerciseFile
+                        .Where(f => f.Id == fileId)
+                        .Select(f => f.Content)
+                        .SingleOrDefault();
+                    break;
+                case "exams":
+                    file = _context.ExamFile
+                        .Where(f => f.Id == fileId)
+                        .Select(f => f.Content)
+                        .SingleOrDefault();
+                    break;
+                default:
+                    break;
+            }
+
+            return file;
+        }
     }
 }

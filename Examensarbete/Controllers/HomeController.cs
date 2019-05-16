@@ -19,7 +19,6 @@ using iTextSharp.text;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Http;
-using ThesisProject.StrategyPattern;
 using System.Data.SqlClient;
 using System.Data;
 
@@ -49,6 +48,22 @@ namespace ThesisProject.Controllers
             {
                 Heading = "Welcome",
                 AboutUs = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+            };
+
+            return View(viewModel);
+        }
+
+        public IActionResult Test()
+        {
+            var course = _context.Course
+                .FirstOrDefault();
+
+            var modules = _moduleRepository.GetModulesForCourse(course.Id); ;
+
+            var viewModel = new CourseViewModel
+            {
+                Name = course.Name,
+                Modules = modules
             };
 
             return View(viewModel);

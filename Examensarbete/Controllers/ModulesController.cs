@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net;
 using ThesisProject.Models;
 using ThesisProject.Repositories;
 using ThesisProject.ViewModels;
@@ -21,6 +23,7 @@ namespace ThesisProject.Controllers
             _moduleRepository = new ModuleRepository(_context);
             _fileRepository = new FileRepository(_context);
         }
+
 
         [HttpPost]
         public IActionResult Details(int id, string type)
@@ -109,35 +112,16 @@ namespace ThesisProject.Controllers
             var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
 
             using (var connection = new SqlConnection(connectionString))
-            {
-                var file = new byte[0];
+            {                
+                var file = _fileRepository.GetFileToDownload(fileId, pdfType);
+                
+                //TODO: Fixa path
+                //var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + fileName + ".pdf";
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-                switch (pdfType)
-                {
-                    case "facts":
-                        file = _context.Facts
-                            .Where(f => f.Id == fileId)
-                            .Select(f => f.Content)
-                            .SingleOrDefault();
-                        break;
-                    case "exercises":
-                        file = _context.ExerciseFile
-                            .Where(f => f.Id == fileId)
-                            .Select(f => f.Content)
-                            .SingleOrDefault();
-                        break;
-                    case "exams":
-                        file = _context.ExamFile
-                            .Where(f => f.Id == fileId)
-                            .Select(f => f.Content)
-                            .SingleOrDefault();
-                        break;
-                    default:
-                        break;
-                }
 
                 //TODO: Byt ut C: till path
-                using (var stream = new StreamWriter("C:\\Users\\Olivia\\Desktop\\" + fileName + "Test" + ".pdf"))
+                using (var stream = new StreamWriter(path/*"C:\\Users\\Olivia\\Desktop\\" + fileName + "Test" + ".pdf"*/))
                 {
                     var bw = new BinaryWriter(stream.BaseStream);
                     bw.Write(file);

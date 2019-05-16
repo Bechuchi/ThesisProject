@@ -10,7 +10,7 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         @* TODO: Ta bort om inte funkat libman *@
-        <link rel="stylesheet" href="~/lib/bootstrap/libman.json" /> 
+        <link rel="stylesheet" href="~/lib/bootstrap/package.json" />
         <link href="~/css/site.css" rel="stylesheet" />
     </environment>
     <environment exclude="Development">
@@ -18,11 +18,13 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        @* TODO: Ta bort *@
+        @*<link rel="stylesheet" href="~/lib/bootstrap/package.json" />*@ 
     </environment>
 </head>
 <body>
     <div class="big-container">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        @*<nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -35,11 +37,19 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        @* TODO: Ta bort hårdkodning *@
+                         TODO: Ta bort hårdkodning 
                         <li><a asp-area="" asp-controller="Home" asp-action="Index">@Localizer["TopNavigation.Home"]</a></li>
                         <li><a asp-area="" asp-controller="Home" asp-action="Course">@Localizer["TopNavigation.Courses"]</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Test">@Localizer["TopNavigation.Home"]</a></li>
                     </ul>
                 </div>
+            </div>
+        </nav>*@
+        <nav class="navbar navbar-fixed-top">
+            <div class="nav navbar-nav">
+                <a asp-area=""asp-controller="Home" asp-action="Index" class="nav-item nav-link">@Localizer["TopNavigation.Home"]</a>
+                <a asp-area="" asp-controller="Home" asp-action="Course" class="nav-item nav-link">@Localizer["TopNavigation.Courses"]</a>
+                <a asp-area="" asp-controller="Home" asp-action="Test" class="nav-item nav-link">@Localizer["TopNavigation.Home"]</a>
             </div>
         </nav>
 
@@ -65,6 +75,9 @@
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        @* TODO: TA bort 2 länk nedan *@
+        @*<script src="~/lib/js/bootstrap.bundle.js"></script>
+        <script src="~/lib/bootstrap/package.json"></script>*@
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">

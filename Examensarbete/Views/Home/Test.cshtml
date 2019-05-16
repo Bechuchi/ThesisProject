@@ -40,15 +40,69 @@
 
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                        @foreach (var facts in module.Facts)
-                        {
-                            <p class="mb-0">
-                                <button class="btn btn-link" onclick="openModuleDetails(@facts.Id, 'facts')">
-                                    @facts.Name
-                                </button>
-                            </p>
-                        }
 
+                        <div id="card-sections">
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="mb-0">
+                                        <button class="btn btn-link">
+                                            Facts:
+                                        </button>
+                                    </h6>
+                                </div>
+
+                                @foreach (var facts in module.Facts)
+                                {
+
+                                    <p class="mb-0">
+                                        <button class="btn btn-link" onclick="openModuleDetails(@facts.Id, 'facts')">
+                                            @facts.Name
+                                        </button>
+                                    </p>
+                                }
+                            </div>
+                            <br />
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="mb-0">
+                                        <button class="btn btn-link">
+                                            Exercises:
+                                        </button>
+                                    </h6>
+                                </div>
+
+                                @foreach (var exercise in module.Facts)
+                                {
+                                    <p class="mb-0">
+                                        <button class="btn btn-link" onclick="openModuleDetails(@exercise.Id, 'exercises')">
+                                            @exercise.Name
+                                        </button>
+                                    </p>
+                                }
+                            </div>
+                            <br />
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="mb-0">
+                                        <button class="btn btn-link">
+                                            Exams:
+                                        </button>
+                                    </h6>
+                                </div>
+
+                                @foreach (var exams in module.Facts)
+                                {
+                                    <p class="mb-0">
+                                        <button class="btn btn-link" onclick="openModuleDetails(@exams.Id, 'exams')">
+                                            @exams.Name
+                                        </button>
+                                    </p>
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,7 +110,8 @@
     </div>
 
     <div id="currentModule">
-
+        
+        <embed class="facts-details-container" src="@Url.Action( "BrowsePdf", "Modules", new { fileId = 1, pdfType = "facts" } )" width="700" height="400" />
     </div>
 </div>
 

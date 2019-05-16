@@ -37,7 +37,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                         TODO: Ta bort hårdkodning 
+                         TODO: Ta bort hårdkodning
                         <li><a asp-area="" asp-controller="Home" asp-action="Index">@Localizer["TopNavigation.Home"]</a></li>
                         <li><a asp-area="" asp-controller="Home" asp-action="Course">@Localizer["TopNavigation.Courses"]</a></li>
                         <li><a asp-area="" asp-controller="Home" asp-action="Test">@Localizer["TopNavigation.Home"]</a></li>
@@ -45,13 +45,16 @@
                 </div>
             </div>
         </nav>*@
-        <nav class="navbar navbar-fixed-top">
+
+        @Html.Partial("_TopNavigation")
+
+        @*<nav class="navbar navbar-fixed-top navbar-expand-lg">
             <div class="nav navbar-nav">
-                <a asp-area=""asp-controller="Home" asp-action="Index" class="nav-item nav-link">@Localizer["TopNavigation.Home"]</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-item nav-link">@Localizer["TopNavigation.Home"]</a>
                 <a asp-area="" asp-controller="Home" asp-action="Course" class="nav-item nav-link">@Localizer["TopNavigation.Courses"]</a>
                 <a asp-area="" asp-controller="Home" asp-action="Test" class="nav-item nav-link">@Localizer["TopNavigation.Home"]</a>
             </div>
-        </nav>
+        </nav>*@
 
         <partial name="_CookieConsentPartial" />
 
@@ -59,18 +62,19 @@
             @RenderBody()
 
         </div>
-    </div>
 
-    <footer>
-        <div class="row">
-            <div class="col-sm-6">
-                <p>&copy; 2019 - ThesisProject</p>
+        <hr />
+        <footer>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>&copy; 2019 - ThesisProject</p>
+                </div>
+                <div class="@*col-sm-4*@ text-right">
+                    @await Html.PartialAsync("_SelectLanguage")
+                </div>
             </div>
-            <div class="col-sm-4 text-right">
-                @await Html.PartialAsync("_SelectLanguage")
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

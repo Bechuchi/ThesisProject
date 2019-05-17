@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Net.Http.Headers;
 using System;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http.Headers;
 using ThesisProject.Models;
 using ThesisProject.Repositories;
 using ThesisProject.ViewModels;
@@ -15,10 +18,13 @@ namespace ThesisProject.Controllers
         private ThesisProjectDBContext _context;
         private ModuleRepository _moduleRepository;
         private readonly FileRepository _fileRepository;
+        private readonly IConfiguration _configuration;
 
-        public ModulesController(ThesisProjectDBContext context)
+        public ModulesController(ThesisProjectDBContext context,
+                                 IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
             //TODO interface 
             _moduleRepository = new ModuleRepository(_context);
             _fileRepository = new FileRepository(_context);
@@ -105,29 +111,21 @@ namespace ThesisProject.Controllers
 
         public ActionResult Download(int fileId, string pdfType, string fileName)
         {
-            //TODO: Fixa connsträng
-            //TODO: Fixa path
             //TODO: Fixa fråga vid download
-
-            var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
+            var connectionString = _configuration.GetConnectionString("DefaultConnection");
 
             using (var connection = new SqlConnection(connectionString))
             {                
                 var file = _fileRepository.GetFileToDownload(fileId, pdfType);
-                
-                //TODO: Fixa path
-                //var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + fileName + ".pdf";
-                var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-
-                //TODO: Byt ut C: till path
-                using (var stream = new StreamWriter(path/*"C:\\Users\\Olivia\\Desktop\\" + fileName + "Test" + ".pdf"*/))
+                var cd = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
                 {
-                    var bw = new BinaryWriter(stream.BaseStream);
-                    bw.Write(file);
-                }
+                    FileNameStar = "download.pdf"
+                    //Inline = false,
+                };
 
-                return RedirectToAction("Course", "Home");
+                Response.Headers.Add(HeaderNames.ContentDisposition, cd.ToString());
+
+                return File(file, "application/pdf");
             }
         }
     }

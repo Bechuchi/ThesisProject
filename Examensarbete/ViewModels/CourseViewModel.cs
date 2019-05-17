@@ -10,7 +10,8 @@ namespace ThesisProject.ViewModels
     {
         public string Name { get; set; }
         public IEnumerable<Module> Modules { get; set; }
+
         public IEnumerable<ModuleViewModel> ModulesVM { get; set; }
-        public ModuleViewModel CurrentDisplayModule { get; set; } //TODO Ta bort
+        public DetailsViewModel CurrentDisplayModule { get; set; } //TODO Ta bort
     }
 }

@@ -1,6 +1,4 @@
-﻿using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -12,8 +10,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.IO;
 using System.Diagnostics;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ThesisProject.Models;

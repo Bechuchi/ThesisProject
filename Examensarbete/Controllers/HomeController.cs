@@ -8,14 +8,11 @@ using ThesisProject.ViewModels;
 using ThesisProject.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
 using ThesisProject.Data;
 using ThesisProject.Repositories;
 using System.Net;
 using System.IO;
 using System.IO.Compression;
-using iTextSharp.text;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Http;
@@ -63,11 +60,46 @@ namespace ThesisProject.Controllers
             var viewModel = new CourseViewModel
             {
                 Name = course.Name,
-                Modules = modules
+                ModulesVM = modules.Select(r => new ModuleViewModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Facts = r.Facts.Select(f => new FactViewModel
+                    {
+                        Id = f.Id,
+                        Name = f.Name
+                    }),
+                    Exams = r.ExamFile.Select(e => new ExamViewModel
+                    {
+                        Id = e.Id,
+                        Name = e.Name
+                    }),
+                    Exercises = r.ExerciseFile.Select(e => new ExerciseViewModel
+                    {
+                        Id = e.Id,
+                        Name = e.Name
+                    })
+                })
             };
 
             return View(viewModel);
         }
+
+        //public IActionResult Test()
+        //{
+        //    var course = _context.Course
+        //        .FirstOrDefault();
+
+        //    var modules = _moduleRepository.GetModulesForCourse(course.Id); ;
+
+        //    var viewModel = new CourseViewModel
+        //    {
+        //        Name = course.Name,
+        //        Modules = modules
+        //    };
+
+        //    return View(viewModel);
+        //}
 
         [HttpPost]
         public IActionResult SetLanguage(string culture, string returnUrl)

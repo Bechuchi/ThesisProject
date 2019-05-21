@@ -15,7 +15,9 @@
 }
 @* INSATT NU *@
 
+
 <div title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
+
     <form id="selectLanguage"
           asp-controller="Home"
           asp-action="SetLanguage"
@@ -28,7 +30,8 @@
                 asp-for="@requestCulture.RequestCulture.UICulture.Name"
                 asp-items="cultureItems"></select>
 
-        <button type="submit" class="btn btn-default btn-xs">@Localizer["Btn.Save"]</button>
+        <button type="submit" class="btn btn-sm">@Localizer["Btn.Save"]</button>
 
     </form>
+
 </div>

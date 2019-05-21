@@ -24,7 +24,6 @@
     <nav class="navbar fixed-top navbar-fixed-top navbar-expand-lg">
         <div class="nav navbar-nav">
             <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-item nav-link">@Localizer["TopNavigation.Home"]</a>
-            @*<a asp-area="" asp-controller="Home" asp-action="Course" class="nav-item nav-link">@Localizer["TopNavigation.Courses"]</a>*@
             <a asp-area="" asp-controller="Home" asp-action="Test" class="nav-item nav-link">@Localizer["TopNavigation.Home"]</a>
             <a asp-area="" asp-controller="Home" asp-action="Today" class="nav-item nav-link">@Localizer["TopNavigation.Courses"]</a>
         </div>
@@ -36,18 +35,14 @@
     <div class="container body-content big-container">
         <partial name="_CookieConsentPartial" />
         @RenderBody()
-        @*<div class="container body-content">
-                @RenderBody()
-
-            </div>*@
     </div>
 
     <footer class="navbar-fixed-bottom">
-        <div class="row">
+        @*<div class="row">*@
             <div class="col-sm-6">
                 <p>&copy; 2019 - ThesisProject</p>
             </div>
-        </div>
+        @*</div>*@
     </footer>
 
     <environment include="Development">

@@ -130,12 +130,15 @@
     <value>Fakta</value>
   </data>
   <data name="Module.Name.1" xml:space="preserve">
-    <value>Modul 1: Introduktion</value>
+    <value>Introduktion</value>
   </data>
   <data name="Module.Name.2" xml:space="preserve">
-    <value>Modul 2: Variabler</value>
+    <value>Variabler</value>
   </data>
   <data name="Programming for dummies" xml:space="preserve">
     <value>Programmering för dummies</value>
+  </data>
+  <data name="Txt.Module" xml:space="preserve">
+    <value>Modul</value>
   </data>
 </root>

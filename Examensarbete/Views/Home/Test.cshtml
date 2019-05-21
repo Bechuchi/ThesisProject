@@ -33,7 +33,7 @@
                 <div class="card-header" id="@("heading" + module.Id)">
                     <h6 class="mb-0">
                         <button class="btn btn-link" data-toggle="collapse" data-target="#@("collapse" + module.Id)" aria-expanded="true" aria-controls="@("collapse" + module.Id)">
-                            @module.Name
+                            @Localizer["Txt.Module"]: @Localizer[module.Name.ToString()]
                         </button>
                     </h6>
                 </div>
@@ -45,9 +45,7 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                    <h6>
-                                        Facts:
-                                    </h6>
+                                    <h6>@Localizer["Module.Facts"]</h6>
                                 </div>
 
                                 @foreach (var facts in module.Facts)
@@ -64,9 +62,7 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                    @*<h6 class="mb-0">*@
-                                        <h6>Exercises:</h6>
-                                    @*</h6>*@
+                                        <h6>@Localizer["Module.Exercises"]</h6>
                                 </div>
 
                                 @foreach (var exercise in module.Exercises)
@@ -82,12 +78,7 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                    <h6 class="mb-0">
-                                        <h6>Exams:</h6>
-                                        @*<button class="btn btn-link">
-                                            Exams:
-                                        </button>*@
-                                    </h6>
+                                    <h6>@Localizer["Module.Exams"]</h6>
                                 </div>
 
                                 @foreach (var exam in module.Exams)

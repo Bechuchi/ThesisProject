@@ -97,12 +97,13 @@ img {
 footer {
     width: 100%;
     background-color: #204693;
-    padding-top: 18px;
+    padding-top: 10px;
     height: 20%;
 }
 
     footer p {
         margin-left: 20px;
+        font-size: 0.9rem;
     }
 
 h1 {

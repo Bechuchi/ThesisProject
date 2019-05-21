@@ -18,86 +18,37 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        @* TODO: Ta bort *@
-        @*<link rel="stylesheet" href="~/lib/bootstrap/package.json" />*@
     </environment>
 </head>
 <body>
-    @*@Html.Partial("_TopNavigation")*@
-    <nav class="navbar navbar-fixed-top navbar-expand-lg">
+    <nav class="navbar fixed-top navbar-fixed-top navbar-expand-lg">
         <div class="nav navbar-nav">
             <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-item nav-link">@Localizer["TopNavigation.Home"]</a>
             @*<a asp-area="" asp-controller="Home" asp-action="Course" class="nav-item nav-link">@Localizer["TopNavigation.Courses"]</a>*@
             <a asp-area="" asp-controller="Home" asp-action="Test" class="nav-item nav-link">@Localizer["TopNavigation.Home"]</a>
             <a asp-area="" asp-controller="Home" asp-action="Today" class="nav-item nav-link">@Localizer["TopNavigation.Courses"]</a>
         </div>
+        <div class="col-sm-10 text-sm-right">
+            @await Html.PartialAsync("_SelectLanguage")
+        </div>
     </nav>
 
-    <div class="big-container">
-        @* TODO: Ta bort rensa *@
-        @*<nav class="navbar navbar-inverse navbar-fixed-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">ThesisProject</a>
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                             TODO: Ta bort hårdkodning
-                            <li><a asp-area="" asp-controller="Home" asp-action="Index">@Localizer["TopNavigation.Home"]</a></li>
-                            <li><a asp-area="" asp-controller="Home" asp-action="Course">@Localizer["TopNavigation.Courses"]</a></li>
-                            <li><a asp-area="" asp-controller="Home" asp-action="Test">@Localizer["TopNavigation.Home"]</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>*@
-
-        @*@Html.Partial("_TopNavigation")*@
-
-        @*<nav class="navbar navbar-fixed-top navbar-expand-lg">
-                <div class="nav navbar-nav">
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-item nav-link">@Localizer["TopNavigation.Home"]</a>
-                    <a asp-area="" asp-controller="Home" asp-action="Course" class="nav-item nav-link">@Localizer["TopNavigation.Courses"]</a>
-                    <a asp-area="" asp-controller="Home" asp-action="Test" class="nav-item nav-link">@Localizer["TopNavigation.Home"]</a>
-                </div>
-            </nav>*@
-
+    <div class="container body-content big-container">
         <partial name="_CookieConsentPartial" />
+        @RenderBody()
+        @*<div class="container body-content">
+                @RenderBody()
 
-        <div class="container body-content">
-            @RenderBody()
-
-        </div>
+            </div>*@
     </div>
-    <hr />
-    @*<footer>
-        <div class="row">
-            <div class="col-sm-6">
-                <p>&copy; 2016 - Adding Localization</p>
-            </div>
-            <div class="col-sm-6 text-right">
-                @await Html.PartialAsync("_SelectLanguagePartial")
-            </div>
-        </div>
-    </footer>*@
 
-    <footer>
+    <footer class="navbar-fixed-bottom">
         <div class="row">
             <div class="col-sm-6">
                 <p>&copy; 2019 - ThesisProject</p>
             </div>
-            <div class="@*col-sm-4*@ text-right">
-                @await Html.PartialAsync("_SelectLanguage")
-            </div>
         </div>
     </footer>
-
-
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

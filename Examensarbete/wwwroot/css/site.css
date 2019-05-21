@@ -2,7 +2,7 @@
 for details on configuring this project to bundle and minify static web assets. */
 body {
     padding-bottom: 20px;
-    background-color: white;
+    /*background-color: white;*/
 }
 
 /* Wrapping element */
@@ -38,28 +38,32 @@ body {
 
 .big-container {
     background-color: #ffffff;
-    width: 80%; 
+    width: 80%;
     margin: auto;
     min-height: 550px;
+    color: #414244;
+    padding-top: 60px;
 }
 
-.navbar-fixed-top, .navbar-fixed-bottom {
-    /*width: 80% !important;*/
-    margin: auto !important;
+.navbar-fixed-top /*, .navbar-fixed-bottom*/ {
     background-color: #204693;
     color: white;
-    height: 50px;
+    height: 70px;
+    font-size: 1.2rem;
+    font-weight: 300;
 }
 
 /*TODO:*/
 /*COLOR LIGHT BLUE VIASAT: #e8eef6*/
 
-/*TODO: Byta till vit text i navbar*/
-
-
-
 .nav-link {
     color: #e8eef6;
+    font-size: 1.2rem;
+    font-weight: 300;
+    padding: 15px;
+    line-height: 70px;
+    position: relative;
+    height: auto;
 }
 
 .progress-nav {
@@ -74,28 +78,23 @@ body {
 .facts-details-container {
     /*margin-right: 120px;*/
     margin-left: 50px;
-    width: 70%;
     height: 600px;
 }
 
 footer {
     height: 50px;
     width: 100%;
-    margin: auto;
+    /*margin: auto;*/
     background-color: #204693;
     padding-top: 35px;
     padding-bottom: 35px;
-}
-
-footer p{
-    margin-left: 35px;
 }
 
 h1 {
     text-align: center;
     margin-bottom: 35px;
     margin-top: 35px;
-    color: #204693;
+    color: #414244;
     /*TODO: Byt färg*/
 }
 

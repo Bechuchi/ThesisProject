@@ -38,17 +38,15 @@
                     </h6>
                 </div>
 
-                <div id="@("collapse" + module.Id)" class="collapse @*show*@" aria-labelledby="@("heading" + module.Id)" data-parent="#accordion">
+                <div id="@("collapse" + module.Id)" class="collapse" aria-labelledby="@("heading" + module.Id)" data-parent="#accordion">
                     <div class="card-body">
 
                         <div id="card-sections">
 
                             <div class="card">
                                 <div class="card-header">
-                                    <h6 class="mb-0">
-                                        <button class="btn btn-link">
-                                            Facts:
-                                        </button>
+                                    <h6>
+                                        Facts:
                                     </h6>
                                 </div>
 
@@ -66,11 +64,9 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                    <h6 class="mb-0">
-                                        <button class="btn btn-link">
-                                            Exercises:
-                                        </button>
-                                    </h6>
+                                    @*<h6 class="mb-0">*@
+                                        <h6>Exercises:</h6>
+                                    @*</h6>*@
                                 </div>
 
                                 @foreach (var exercise in module.Exercises)
@@ -87,9 +83,10 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h6 class="mb-0">
-                                        <button class="btn btn-link">
+                                        <h6>Exams:</h6>
+                                        @*<button class="btn btn-link">
                                             Exams:
-                                        </button>
+                                        </button>*@
                                     </h6>
                                 </div>
 
@@ -113,6 +110,7 @@
         
         <embed class="facts-details-container" src="@Url.Action( "BrowsePdf", "Modules", new { fileId = 1, pdfType = "facts" } )" width="700" height="400" />
     </div>
+    <br />
 </div>
 
 <script>

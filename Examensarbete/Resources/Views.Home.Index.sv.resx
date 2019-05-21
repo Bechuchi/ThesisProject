@@ -118,19 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="StartPage.Information.Exercises.Parapragh" xml:space="preserve">
-    <value>Som rubriken lyder. Jag ser upp till människor som jobbar svart, så länge de jobbar vitt också, som skattar minst ca 7000 i månaden. Varför är det så "kriminellt" att jobba svart i Sverige? Pga politikerna som är för tröga att skaffa vanliga jobb och vill ha högre lön?
-Självklart blir man nedstämd till att jobba svart när man ser vad den offentliga sektorn i Sverige åstadkommer för skit, t.ex. kommunpolitiker med månadslön på 30-50k, socialbidragstagare, irakiska kulturföreningar m.m.</value>
+    <value>Detta måste översättas till den maskinkod som maskinen är konstruerad att direkt förstå. Programmering direkt i maskinkod förekommer praktiskt taget inte alls eftersom det är för arbetskrävande. Olika typer av maskiner har helt olika uppsättningar instruktioner i sin maskinkod. Begrepp förknippade med programmering är bland annat slingor och uppställningar. Programmerare använder sig därför av olika sorteringsalgoritmer för att sortera data i ordnade listor. Som inledning på introduktionen får deltagarna presentera sig genom en sorteringsövning, där de ska samarbeta för att sortera in sig utifrån förnamn i bokstavsordning.</value>
   </data>
   <data name="StartPage.Information.Facts.Parapragh" xml:space="preserve">
-    <value>Som rubriken lyder. Jag ser upp till människor som jobbar svart, så länge de jobbar vitt också, som skattar minst ca 7000 i månaden. Varför är det så "kriminellt" att jobba svart i Sverige? Pga politikerna som är för tröga att skaffa vanliga jobb och vill ha högre lön?
-Självklart blir man nedstämd till att jobba svart när man ser vad den offentliga sektorn i Sverige åstadkommer för skit, t.ex. kommunpolitiker med månadslön på 30-50k, socialbidragstagare, irakiska kulturföreningar m.m.</value>
+    <value>Programmering handlar om att instruera en maskin eller del av en maskin, till exempel en mikrodator, dator, robot eller NC-maskin att utföra ett visst arbete. Personen som utför detta hantverk brukar ofta tituleras programmerare. Programmering är en del av det vidare begreppet programvaruutveckling eller mjukvaruutveckling som även innefattar aktiviteter som sammanställning av krav, mjukvarudesign och testning. När man programmerar skriver man ett program och man använder ett programspråk. Olika delar av ett program kan vara skrivet i olika programspråk. Maskinen förstår normalt inte programspråket direkt.</value>
   </data>
   <data name="StartPage.Information.Header" xml:space="preserve">
     <value>Rekomendationer till dig som lärare</value>
   </data>
   <data name="StartPage.Information.Tests.Parapragh" xml:space="preserve">
-    <value>Som rubriken lyder. Jag ser upp till människor som jobbar svart, så länge de jobbar vitt också, som skattar minst ca 7000 i månaden. Varför är det så "kriminellt" att jobba svart i Sverige? Pga politikerna som är för tröga att skaffa vanliga jobb och vill ha högre lön?
-Självklart blir man nedstämd till att jobba svart när man ser vad den offentliga sektorn i Sverige åstadkommer för skit, t.ex. kommunpolitiker med månadslön på 30-50k, socialbidragstagare, irakiska kulturföreningar m.m.</value>
+    <value>Det här är ett upplägg med övningar för att komma igång och arbeta med programmering i skolan. Innehållet kommer från en workshop som Skolverket och Kodcentrum genomförde under SETT-mässorna i april och oktober 2018. Programmering handlar om att skapa instruktioner som en dator kan förstå. Dessa instruktioner kallas för algoritmer. Algoritmer kan till exempel användas för att sortera och strukturera upp data. All data som matas in i en dator, vad den än innehåller, behöver sorteras för att bli till information som vi människor kan använda.</value>
   </data>
   <data name="StartPage.Information.Header.Exercises" xml:space="preserve">
     <value>Övningar</value>

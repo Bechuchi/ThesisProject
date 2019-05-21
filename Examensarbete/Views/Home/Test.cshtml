@@ -67,11 +67,12 @@
                                 {
                                     <p class="mb-0">
                                         <button class="btn btn-link" onclick="openModuleDetails(@exam.Id, 'exams')">
-                                            @exam.Name
+                                            @Localizer[exam.Name.ToString()]
                                         </button>
                                     </p>
                                 }
                             </div>
+                            <br />
 
                             <div class="card">
                                 <div class="card-header">
@@ -81,8 +82,8 @@
                                 @foreach (var image in module.Images)
                                 {
                                     <p class="mb-0">
-                                        <button class="btn btn-link" onclick="openModuleDetails(@image.Id, 'images')">
-                                            @image.Name
+                                        <button class="btn btn-link" onclick="openModuleDetails(@image.Id, 'image')">
+                                            @Localizer[image.Name.ToString()]
                                         </button>
                                     </p>
                                 }
@@ -91,6 +92,7 @@
                     </div>
                 </div>
             </div>
+            <br />
         }
     </div>
 

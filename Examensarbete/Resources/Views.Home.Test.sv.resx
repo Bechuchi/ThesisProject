@@ -123,6 +123,12 @@
   <data name="Home Page" xml:space="preserve">
     <value>Start sida</value>
   </data>
+  <data name="if-music" xml:space="preserve">
+    <value>If-musik</value>
+  </data>
+  <data name="if-statement" xml:space="preserve">
+    <value>If-sats</value>
+  </data>
   <data name="Module.1.Facts" xml:space="preserve">
     <value>Vad är programmering?</value>
   </data>
@@ -135,6 +141,12 @@
   <data name="Module.Facts" xml:space="preserve">
     <value>Fakta</value>
   </data>
+  <data name="Module.Images" xml:space="preserve">
+    <value>Bilder</value>
+  </data>
+  <data name="Module.Intro.Exam.1" xml:space="preserve">
+    <value>Prov 1</value>
+  </data>
   <data name="Module.Name.1" xml:space="preserve">
     <value>Introduktion</value>
   </data>
@@ -142,7 +154,7 @@
     <value>Variabler</value>
   </data>
   <data name="Programming for dummies" xml:space="preserve">
-    <value>Programmering för dummies</value>
+    <value>Programmering för nybörjare</value>
   </data>
   <data name="Txt.Module" xml:space="preserve">
     <value>Modul</value>

@@ -197,15 +197,15 @@ namespace ThesisProject.Data
         {
             var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
 
-            var path = "C:\\Users\\Olivia\\Desktop\\bild 1.jpg";
-            var fi = new FileInfo("bild 1");
+            var path = "C:\\Users\\Olivia\\Desktop\\Alla.Höra.jpg";
+            var fi = new FileInfo("Alla.Höra");
             var documentContent = System.IO.File.ReadAllBytes(path);
 
             //string name = fi.Name;
             //string extn = fi.Extension;
 
             //TODO: Fixa hårdkodade värden
-            var name = "if-statement";
+            var name = "if-music";
             var extn = "jpg";
             var moduleId = 1009;
 

@@ -40,47 +40,12 @@ namespace ThesisProject.Controllers
                 FileId = id
             };
 
-            //TODO bryta ut Get include
-            //var module = _moduleRepository.Get(id);
-
             return PartialView("_Details", viewModel);
         }
 
-
-        //[HttpPost]
-        //public IActionResult Details(int id, string type)
-        //{
-        //    //TODO bryta ut Get include
-        //    var module = _moduleRepository.Get(id);
-        //    var viewModel = new ModuleViewModel
-        //    {
-        //        Name = module.Name,
-        //        Facts = module.Facts.ToList(),
-        //        Exams = module.ExamFile.ToList(),
-        //        Exercises = module.ExerciseFile.ToList(),
-        //        CurrentPDF = _fileRepository.GetCurrentFile(1, "GetFactsFileById")
-        //    };
-
-        //    switch (type)
-        //    {
-        //        case "facts":
-        //            //return File(fs, "application/pdf");
-        //            return PartialView("_FactsDetails", viewModel);
-        //        case "exercises":
-        //            return PartialView("_ExerciseDetails", viewModel);
-        //        case "exams":
-        //            return PartialView("_ExamDetails", viewModel);
-        //        default:
-        //            break;
-        //    }
-
-        //    //TODO: Fel måste fixas
-        //    return View(viewModel);
-        //}
-
-        public ActionResult DisplayImage()
+        public ActionResult DisplayImage(int id)
         {
-            var image = _fileRepository.GetCurrentFile(2, "GetImageById");
+            var image = _fileRepository.GetCurrentFile(id, "GetImageById");
 
             return new FileContentResult(image, "application/jpg");
         }

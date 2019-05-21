@@ -23,7 +23,7 @@ namespace ThesissProjectTests.Controllers
 
             _context = new ThesisProjectDBContext(options);
 
-            var controller = new HomeController(_context, null);
+            var controller = new HomeController(_context, null, null);
             
 
             var result = controller.Index();

@@ -84,13 +84,13 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 .facts-details-container {
-    margin-left: 65px;
+    margin-left: 95px;
     height: 600px;
     width: 650px;
 }
 
 img {
-    margin-left: 65px;
+    margin-left: 95px;
     height: 600px;
     width: 650px;
 }
@@ -118,11 +118,11 @@ h1 {
     white-space: nowrap;
     overflow: hidden;*/
 
-    width: 240px;
+    width: 280px;
 }
 
 .card-part {
-    width: 200px;
+    width: 240px;
 }
 
 h5, h6 {

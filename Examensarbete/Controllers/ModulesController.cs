@@ -27,7 +27,7 @@ namespace ThesisProject.Controllers
             _configuration = configuration;
             //TODO interface 
             _moduleRepository = new ModuleRepository(_context);
-            _fileRepository = new FileRepository(_context);
+            _fileRepository = new FileRepository(_context, _configuration);
         }
 
 
@@ -53,11 +53,16 @@ namespace ThesisProject.Controllers
         public ActionResult BrowsePdf(int fileId, string pdfType)
         {
             string cmdText = "";
-            var fileLang = _context.ExamFile.Where(e => e.Id == fileId).Select(e => e.Language).SingleOrDefault();
+
+            //var currentLanguage = _fileRepository.GetCurrentLanguage();
+
+            //var fileLang = _context.ExamFile
+            //                .Where(e => e.Id == fileId && e.Language == "fr")
+            //                .Select(e => e.Content)
+            //                .SingleOrDefault();
 
             switch (pdfType)
             {
-                //TODO: Fixa part type
                 case "facts":
                     cmdText = "GetFactsFileById";
                     break;
@@ -73,6 +78,7 @@ namespace ThesisProject.Controllers
 
             var file = _fileRepository.GetCurrentFile(fileId, cmdText);
 
+            //return new FileContentResult(fileLang, "application/pdf");
             return new FileContentResult(file, "application/pdf");
         }
 
@@ -86,8 +92,8 @@ namespace ThesisProject.Controllers
                 var file = _fileRepository.GetFileToDownload(fileId, pdfType);
                 var cd = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
                 {
-                    FileNameStar = "download.pdf"
-                    //Inline = false,
+                    FileNameStar = fileName + ".pdf"
+                    //FileNameStar = "download.pdf"
                 };
 
                 Response.Headers.Add(HeaderNames.ContentDisposition, cd.ToString());

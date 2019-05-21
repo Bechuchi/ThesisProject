@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,17 +12,22 @@ namespace ThesisProject.Repositories
     public class FileRepository
     {
         private readonly ThesisProjectDBContext _context;
+        private readonly IConfiguration _configuration;
+        private string _currentLanguage;
 
-        public FileRepository(ThesisProjectDBContext context)
+        public FileRepository(ThesisProjectDBContext context,
+                              IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public byte[] GetExamFile(int id)
         {
             //TODO ta bort hårdkodat id
             id = 14;
-            var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
+            //var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
+            var connectionString = _configuration.GetConnectionString("DefaultConnection");
 
             using (var connection = new SqlConnection(connectionString))
             {

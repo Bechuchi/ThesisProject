@@ -9,7 +9,7 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        @* TODO: Ta bort om inte funkat libman *@
+
         <link rel="stylesheet" href="~/lib/bootstrap/package.json" />
         <link href="~/css/site.css" rel="stylesheet" />
     </environment>
@@ -22,10 +22,9 @@
 </head>
 <body>
     <nav class="navbar fixed-top navbar-fixed-top navbar-expand-lg">
-        <div class="nav navbar-nav">
+        <div class="nav navbar-nav">            
             <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-item nav-link">@Localizer["TopNavigation.Home"]</a>
-            <a asp-area="" asp-controller="Home" asp-action="Test" class="nav-item nav-link">@Localizer["TopNavigation.Courses"]</a>
-            @*<a asp-area="" asp-controller="Home" asp-action="Today" class="nav-item nav-link">@Localizer["TopNavigation.Courses"]</a>*@
+            <a asp-area="" asp-controller="Home" asp-action="Course" class="nav-item nav-link">@Localizer["TopNavigation.Courses"]</a>
         </div>
         <div class="col-sm-10 text-sm-right">
             @await Html.PartialAsync("_SelectLanguage")

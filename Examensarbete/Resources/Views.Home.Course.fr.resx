@@ -129,7 +129,7 @@
   <data name="if-statement" xml:space="preserve">
     <value>If-statement</value>
   </data>
-  <data name="Module.1.Facts" xml:space="preserve">
+  <data name="Module.1.Fact" xml:space="preserve">
     <value>C'est quoi de programmation?</value>
   </data>
   <data name="Module.Exams" xml:space="preserve">
@@ -158,5 +158,8 @@
   </data>
   <data name="Module.Intro.Exam.1" xml:space="preserve">
     <value>L'exam 1</value>
+  </data>
+  <data name="link.download" xml:space="preserve">
+    <value>Télécharger</value>
   </data>
 </root>

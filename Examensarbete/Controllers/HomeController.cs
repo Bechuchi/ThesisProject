@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Http;
 using System.Data.SqlClient;
 using System.Data;
 using System.Globalization;
+using Microsoft.Extensions.Configuration;
 
 namespace ThesisProject.Controllers
 {
@@ -27,89 +28,90 @@ namespace ThesisProject.Controllers
         public string _currentLanguage;
         private ThesisProjectDBContext _context;
         private ModuleRepository _moduleRepository;
-
+        private IConfiguration _configuration;
         private readonly IStringLocalizer<HomeController> _localizer;
-        //TODO: Kanske ta bort
-        //private string _currentLanguage;
+
 
         public HomeController(ThesisProjectDBContext context,
-                              IStringLocalizer<HomeController> localizer)
+                              IStringLocalizer<HomeController> localizer,
+                              IConfiguration configuration)
         {
             _context = context;
             //TODO dependendy injecton
             _moduleRepository = new ModuleRepository(_context);
             _localizer = localizer;
+            _configuration = configuration;
         }
 
-        public IActionResult Today()
-        {
-            var course = _context.Course
-                .FirstOrDefault();
+        //public IActionResult Today()
+        //{
+        //    var course = _context.Course
+        //        .FirstOrDefault();
 
-            var modules = _moduleRepository.GetModulesForCourse(course.Id); ;
+        //    var modules = _moduleRepository.GetModulesForCourse(course.Id); ;
 
-            var viewModel = new CourseViewModel
-            {
-                Name = course.Name,
-                ModulesVM = modules.Select(r => new ModuleViewModel
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                    PartsOfModule = new List<PartOfModule>()
-                    {
-                        new PartOfModule
-                        {
-                            Id = 1,
-                            PartType = "facts",
-                            FactsNew = r.Facts.Select(f => new FactViewModel
-                            {
-                                Id = f.Id,
-                                Name = f.Name
-                            }).ToList()
-                        },
-                        new PartOfModule
-                        {
-                            Id = 2,
-                            PartType = "exercises"
-                        },
-                        new PartOfModule
-                        {
-                            Id = 3,
-                            PartType = "exams",
-                            ExamsNew = r.ExamFile.Select(e => new ExamViewModel
-                            {
-                                Id = e.Id,
-                                Name = e.Name
-                            }).ToList()
-                        }
-                    },
-                    Facts = r.Facts.Select(f => new FactViewModel
-                    {
-                        Id = f.Id,
-                        Name = f.Name
-                    }),
-                    Exams = r.ExamFile.Select(e => new ExamViewModel
-                    {
-                        Id = e.Id,
-                        Name = e.Name
-                    }),
-                    Exercises = r.ExerciseFile.Select(e => new ExerciseViewModel
-                    {
-                        Id = e.Id,
-                        Name = e.Name
-                    })
-                })
-            };
+        //    var viewModel = new CourseViewModel
+        //    {
+        //        Name = course.Name,
+        //        ModulesVM = modules.Select(r => new ModuleViewModel
+        //        {
+        //            Id = r.Id,
+        //            Name = r.Name,
+        //            PartsOfModule = new List<PartOfModule>()
+        //            {
+        //                new PartOfModule
+        //                {
+        //                    Id = 1,
+        //                    PartType = "facts",
+        //                    FactsNew = r.Facts.Select(f => new FactViewModel
+        //                    {
+        //                        Id = f.Id,
+        //                        Name = f.Name
+        //                    }).ToList()
+        //                },
+        //                new PartOfModule
+        //                {
+        //                    Id = 2,
+        //                    PartType = "exercises"
+        //                },
+        //                new PartOfModule
+        //                {
+        //                    Id = 3,
+        //                    PartType = "exams",
+        //                    ExamsNew = r.ExamFile.Select(e => new ExamViewModel
+        //                    {
+        //                        Id = e.Id,
+        //                        Name = e.Name
+        //                    }).ToList()
+        //                }
+        //            },
+        //            Facts = r.Facts.Select(f => new FactViewModel
+        //            {
+        //                Id = f.Id,
+        //                Name = f.Name
+        //            }),
+        //            Exams = r.ExamFile.Select(e => new ExamViewModel
+        //            {
+        //                Id = e.Id,
+        //                Name = e.Name
+        //            }),
+        //            Exercises = r.ExerciseFile.Select(e => new ExerciseViewModel
+        //            {
+        //                Id = e.Id,
+        //                Name = e.Name
+        //            })
+        //        })
+        //    };
 
-            return View(viewModel);
-        }
+        //    return View(viewModel);
+        //}
 
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Test()
+        public IActionResult Course()
         {
             var course = _context.Course
                 .FirstOrDefault();
@@ -158,74 +160,7 @@ namespace ThesisProject.Controllers
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
             );
 
-            _currentLanguage = culture;
-
             return LocalRedirect(returnUrl);
         }
-
-        public IActionResult Course()
-        {
-            //TODO: Move process of seeding
-            var seeder = new FileSeeder(_context);
-            seeder.SeedDbWithImage();
-
-            //TODO lägga i repo(?)
-            var course = _context.Course
-                .FirstOrDefault();
-
-            var modules = _moduleRepository.GetModulesForCourse(course.Id); ;
-            
-            var viewModel = new CourseViewModel
-            {
-                Name = course.Name,
-                Modules = modules
-            };
-
-            ViewData["MyTitle"] = _localizer["The localised title of my app!"];
-
-            return View(viewModel);
-        }
-
-        //TODO: Ta bort när pdf är fixat
-        //Läser upp ett pdf dokument i browsern men texten har skrivits in från action metoden
-        //public ActionResult PdfTest()
-        //{
-        //    MemoryStream workStream = new MemoryStream();
-        //    Document document = new Document();
-        //    PdfWriter.GetInstance(document, workStream).CloseStream = false;
-
-        //    document.Open();
-        //    document.Add(new Paragraph("Hello World"));
-        //    document.Add(new Paragraph(DateTime.Now.ToString()));
-        //    document.Close();
-
-        //    byte[] byteInfo = workStream.ToArray();
-        //    workStream.Write(byteInfo, 0, byteInfo.Length);
-        //    workStream.Position = 0;
-
-        //    return new FileStreamResult(workStream, "application/pdf");
-        //}
-
-        //TODO: Ta bort när pdf funkar (förmodligen onödig då jag ska få upp min pdf från db och inte som bytes)
-        //public bool ByteArrayToFile()
-        //{
-        //    var fileName = "OliviasHejjarklack";
-        //    //FileSeeder seeder = new FileSeeder(_context);
-        //    //var byteArray = seeder.Download();
-
-        //    //try
-        //    //{
-        //    //    using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
-        //    //    {
-        //    //        fs.Write(byteArray, 0, byteArray.Length);
-        //    //        return true;
-        //    //    }
-        //    //}
-        //    //catch (Exception ex)
-        //    //{
-        //    //    Console.WriteLine("Exception caught in process: {0}", ex);
-        //    //    return false;
-        //    //}
-        //}
     }
 }

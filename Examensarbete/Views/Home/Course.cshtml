@@ -2,124 +2,105 @@
 @model ThesisProject.ViewModels.CourseViewModel
 @inject IViewLocalizer Localizer
 
-<link href="~/css/site.css" rel="stylesheet" />
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
 
-<h1 style="font-weight: bold">@Localizer[Model.Name.ToString()]</h1>
+<h1>@Localizer[Model.Name.ToString()]</h1>
 
-@* TODO: Add colors and buttons for modules *@
-<nav class="progress-nav">
-    @foreach (var module in Model.Modules)
-    {
-        if (module.Status == "TODO")
-        {
-            <button class="btn btn-danger disabled">@module.Name</button>
-        }
-        else if (module.Status == "In progress")
-        {
-            <button class="btn btn-warning active">@module.Name</button>
-        }
-        else
-        {
-            <button class="btn btn-success disabled">@module.Name</button>
-        }
-    }
-</nav>
-
-<br />
-
-<div id="wrapper" style="overflow: hidden">
+<div id="moduleWrapper" style="overflow: hidden">
     <div id="accordion" style="float: left">
-        @foreach (var module in Model.Modules)
+        @foreach (var module in Model.ModulesVM)
         {
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4>
-                        <a href="#@module.Id" data-toggle="collapse" data-parent="#accordion">
-                            @Localizer[module.Name.ToString()]
-                        </a>
-                    </h4>
+            <div class="card ">
+                <div class="card-header" id="@("heading" + module.Id)">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#@("collapse" + module.Id)" aria-expanded="true" aria-controls="@("collapse" + module.Id)">
+                            <h5>@Localizer["Txt.Module"]: @Localizer[module.Name.ToString()]</h5>
+                        </button>
                 </div>
-                <div id="@module.Id" class="panel-collapse collapse">
 
-                    <div class="panel-body">
+                <div id="@("collapse" + module.Id)" class="collapse" aria-labelledby="@("heading" + module.Id)" data-parent="#accordion">
+                    <div class="card-body">
 
-                        <div @*id="accordionSec"*@>
-                            @{
-                                string sectionType = "";
-                                string param = "";
+                        <div id="card-sections">
 
-                                for (int i = 0; i < 3; i++)
+                            <div class="card card-part">
+                                <div class="card-header">
+                                    <h6>@Localizer["Module.Facts"]</h6>
+                                </div>
+
+                                @foreach (var facts in module.Facts)
                                 {
-                                    switch (i)
-                                    {
-                                        case 0:
-                                            sectionType = "Module.Facts";
-                                            param = "facts";
-                                            break;
-                                        case 1:
-                                            sectionType = "Module.Exercises";
-                                            param = "exercises";
-                                            break;
-                                        case 2:
-                                            sectionType = "Module.Exams";
-                                            param = "exams";
-                                            break;
-                                        default:
-                                            break;
-                                    }
-
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <a href="#@i" data-toggle="collapse" data-parent="accordionSec">@Localizer[sectionType]</a>
-                                        </div>
-                                        <div id="@i" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                @if (i == 0)
-                                                {
-                                                    @foreach (var f in module.Facts.ToList())
-                                                    {
-                                                        <h6><a onclick="openModuleDetails(@f.Id, 'facts')">@f.Name</a></h6>
-                                                    }
-
-                                                }
-                                                else if (i == 1)
-                                                {
-                                                    @foreach (var e in module.ExerciseFile.ToList())
-                                                    {
-                                                        <h6><a onclick="openModuleDetails(@e.Id, 'exercises')">@e.Name</a></h6>
-                                                    }
-                                                }
-                                                else if (i == 2)
-                                                {
-                                                    @foreach (var e in module.ExamFile.ToList())
-                                                    {
-                                                        <h6><a onclick="openModuleDetails(@e.Id, 'exams')">@e.Name</a></h6>
-                                                    }
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    <p class="mb-0">
+                                        <button class="btn btn-link" onclick="openModuleDetails(@facts.Id, 'facts')">
+                                            @Localizer[facts.Name.ToString()]
+                                        </button>
+                                    </p>
                                 }
-                            }
+                            </div>
+                            <br />
+
+                            <div class="card card-part">
+                                <div class="card-header">
+                                    <h6>@Localizer["Module.Exercises"]</h6>
+                                </div>
+
+                                @foreach (var exercise in module.Exercises)
+                                {
+                                    <p class="mb-0">
+                                        <button class="btn btn-link" onclick="openModuleDetails(@exercise.Id, 'exercises')">
+                                            @Localizer[exercise.Name.ToString()]
+                                        </button>
+                                    </p>
+                                }
+                            </div>
+                            <br />
+
+                            <div class="card card-part">
+                                <div class="card-header">
+                                    <h6>@Localizer["Module.Exams"]</h6>
+                                </div>
+
+                                @foreach (var exam in module.Exams)
+                                {
+                                    <p class="mb-0">
+                                        <button class="btn btn-link" onclick="openModuleDetails(@exam.Id, 'exams')">
+                                            @Localizer[exam.Name.ToString()]
+                                        </button>
+                                    </p>
+                                }
+                            </div>
+                            <br />
+
+                            <div class="card card-part">
+                                <div class="card-header">
+                                    <h6>@Localizer["Module.Images"]</h6>
+                                </div>
+
+                                @foreach (var image in module.Images)
+                                {
+                                    <p class="mb-0">
+                                        <button class="btn btn-link" onclick="openModuleDetails(@image.Id, 'image')">
+                                            @Localizer[image.Name.ToString()]
+                                        </button>
+                                    </p>
+                                }
+                            </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
+            <br />
         }
     </div>
 
-    <div id="currentModule" @*style="float: right"*@>
+    <div id="currentModule">
+
+        <embed class="facts-details-container" src="@Url.Action( "BrowsePdf", "Modules", new { fileId = 3, pdfType = "facts" } )" width="700" height="400" />
 
     </div>
+    <br />
 </div>
 
-
-@* TODO: object as in param, not id *@
 <script>
 
     function openModuleDetails(id, type) {

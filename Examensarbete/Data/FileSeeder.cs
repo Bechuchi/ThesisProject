@@ -156,15 +156,15 @@ namespace ThesisProject.Data
         {
             var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
 
-            var path = "C:\\Users\\Olivia\\Desktop\\Module.1.Facts.pdf";
-            var fi = new FileInfo("Module.1.Facts");
+            var path = "C:\\Users\\Olivia\\Desktop\\Module.1.Fact.pdf";
+            var fi = new FileInfo("Module.1.Fact");
             var documentContent = System.IO.File.ReadAllBytes(path);
 
             //string name = fi.Name;
             //string extn = fi.Extension;
 
             //TODO: Fixa hårdkodade värden
-            var name = "Module.1.Facts";
+            var name = "Module.1.Fact";
             var extn = "pdf";
             var moduleId = 1009;
 

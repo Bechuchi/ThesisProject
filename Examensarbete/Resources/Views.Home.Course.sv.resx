@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Frågesport 1" xml:space="preserve">
-    <value>Frågesport</value>
+    <value>Frågesport 1</value>
   </data>
   <data name="Home Page" xml:space="preserve">
     <value>Start sida</value>
@@ -129,7 +129,7 @@
   <data name="if-statement" xml:space="preserve">
     <value>If-sats</value>
   </data>
-  <data name="Module.1.Facts" xml:space="preserve">
+  <data name="Module.1.Fact" xml:space="preserve">
     <value>Vad är programmering?</value>
   </data>
   <data name="Module.Exams" xml:space="preserve">
@@ -158,5 +158,8 @@
   </data>
   <data name="Txt.Module" xml:space="preserve">
     <value>Modul</value>
+  </data>
+  <data name="link.download" xml:space="preserve">
+    <value>Ladda ner</value>
   </data>
 </root>

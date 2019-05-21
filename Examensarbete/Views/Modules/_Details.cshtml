@@ -1,9 +1,11 @@
 ﻿@model ThesisProject.ViewModels.DetailsViewModel
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @if (Model.PdfType == "image")
 {
-    <img src="@Url.Action( "DisplayImage", "Modules", new { id = Model.FileId })"/>
+    <img src="@Url.Action( "DisplayImage", "Modules", new { id = Model.FileId })" />
+
 }
 else
 {
@@ -11,8 +13,9 @@ else
 }
 
 
-<a asp-controller="Modules"
-   asp-action="Download"
-   asp-route-fileId="14"
-   asp-route-pdfType="exams"
-   asp-route-fileName="OliviaTest">Download</a>
+        <a style="color: #414244; left: auto"
+           asp-controller="Modules"
+           asp-action="Download"
+           asp-route-fileId="@Model.FileId"
+           asp-route-pdfType="@Model.PdfType"
+           asp-route-fileName="OliviaTest">@Localizer["link.download"]</a>

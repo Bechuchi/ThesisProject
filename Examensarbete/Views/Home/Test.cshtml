@@ -13,11 +13,9 @@
         {
             <div class="card ">
                 <div class="card-header" id="@("heading" + module.Id)">
-                    <h6 class="mb-0">
                         <button class="btn btn-link" data-toggle="collapse" data-target="#@("collapse" + module.Id)" aria-expanded="true" aria-controls="@("collapse" + module.Id)">
-                            @Localizer["Txt.Module"]: @Localizer[module.Name.ToString()]
+                            <h5>@Localizer["Txt.Module"]: @Localizer[module.Name.ToString()]</h5>
                         </button>
-                    </h6>
                 </div>
 
                 <div id="@("collapse" + module.Id)" class="collapse" aria-labelledby="@("heading" + module.Id)" data-parent="#accordion">
@@ -25,7 +23,7 @@
 
                         <div id="card-sections">
 
-                            <div class="card">
+                            <div class="card card-part">
                                 <div class="card-header">
                                     <h6>@Localizer["Module.Facts"]</h6>
                                 </div>
@@ -41,7 +39,7 @@
                             </div>
                             <br />
 
-                            <div class="card">
+                            <div class="card card-part">
                                 <div class="card-header">
                                     <h6>@Localizer["Module.Exercises"]</h6>
                                 </div>
@@ -50,7 +48,6 @@
                                 {
                                     <p class="mb-0">
                                         <button class="btn btn-link" onclick="openModuleDetails(@exercise.Id, 'exercises')">
-                                            @*@exercise.Name*@
                                             @Localizer[exercise.Name.ToString()]
                                         </button>
                                     </p>
@@ -58,7 +55,7 @@
                             </div>
                             <br />
 
-                            <div class="card">
+                            <div class="card card-part">
                                 <div class="card-header">
                                     <h6>@Localizer["Module.Exams"]</h6>
                                 </div>
@@ -74,7 +71,7 @@
                             </div>
                             <br />
 
-                            <div class="card">
+                            <div class="card card-part">
                                 <div class="card-header">
                                     <h6>@Localizer["Module.Images"]</h6>
                                 </div>

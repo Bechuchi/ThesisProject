@@ -1,6 +1,7 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
 /*body {
+
 }*/
 
 /* Wrapping element */
@@ -46,14 +47,10 @@ for details on configuring this project to bundle and minify static web assets. 
 .navbar-fixed-top {
     background-color: #204693 !important;
     color: #e8eef6;
-    height: 80px;
+    height: 75px;
     font-size: 1.2rem;
     font-weight: 300;
     padding: 15px;
-    /*padding: 15px;
-    line-height: 70px;
-    position: relative;
-    height: auto;*/
 }
 
     .navbar-fixed-top button {
@@ -66,8 +63,7 @@ for details on configuring this project to bundle and minify static web assets. 
     font-size: 1.2rem;
     font-weight: 300;
 }
-/*TODO:*/
-/*COLOR LIGHT BLUE VIASAT: #e8eef6*/
+
 .nav-link {
     color: #e8eef6;
     font-size: 1.2rem;
@@ -88,7 +84,6 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 .facts-details-container {
-    /*margin-right: 120px;*/
     margin-left: 65px;
     height: 600px;
     width: 650px;
@@ -101,11 +96,9 @@ img {
 }
 footer {
     width: 100%;
-    /*margin: auto;*/
     background-color: #204693;
     padding-top: 18px;
-    padding-bottom: 30px;
-    height: 30px;
+    height: 20%;
 }
 
     footer p {
@@ -123,6 +116,7 @@ h1 {
     /*text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;*/
+
     width: 240px;
 }
 
@@ -136,4 +130,9 @@ h5, h6 {
 
 .btn-link {
     color: #414244;
+}
+
+.selectBox {
+    border-radius: 4px;
+    border: 1px solid #AAAAAA;
 }

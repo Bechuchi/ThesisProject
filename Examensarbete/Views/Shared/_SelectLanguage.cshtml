@@ -13,8 +13,6 @@
         .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
         .ToList();
 }
-@* INSATT NU *@
-
 
 <div title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
 
@@ -26,7 +24,7 @@
           role="form">
         @Localizer["Txt.Language"]:
 
-        <select name="culture"
+        <select class="selectBox" name="culture"
                 asp-for="@requestCulture.RequestCulture.UICulture.Name"
                 asp-items="cultureItems"></select>
 

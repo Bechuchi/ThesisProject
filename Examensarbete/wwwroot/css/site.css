@@ -56,9 +56,9 @@ body {
     height: auto;*/
 }
 
-.navbar-fixed-top button {
-    background-color: #e8eef6;
-}
+    .navbar-fixed-top button {
+        background-color: #e8eef6;
+    }
 
 .navbar-fixed-bottom {
     background-color: #204693;
@@ -93,7 +93,6 @@ body {
     height: 600px;
 }
 
-
 footer {
     width: 100%;
     /*margin: auto;*/
@@ -118,4 +117,5 @@ h1 {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    
 }

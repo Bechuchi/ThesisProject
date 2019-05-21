@@ -25,6 +25,49 @@ namespace ThesisProject.Data
             _context = context;
         }
 
+        public void SeedDbWithExamFileByLanguage()
+        {
+            //TODO; Connsträng
+            var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
+
+            var path = "C:\\Users\\Olivia\\Desktop\\Modul 1_ Prov 1 fr.pdf";
+            var fi = new FileInfo("Modul 1_ Prov 1 fr");
+            var documentContent = System.IO.File.ReadAllBytes(path);
+
+            //string name = fi.Name;
+            //string extn = fi.Extension;
+
+            //TODO: Fixa hårdkodade värden
+            var name = "Module.Intro.Exam.1";
+            var extn = "pdf";
+            var language = "fr";
+            var moduleId = 1009;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand("SaveExamFile", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    command.Parameters.Add("@Name", SqlDbType.VarChar).Value = name;
+                    command.Parameters.Add("@Content", SqlDbType.VarBinary, documentContent.Length).Value = documentContent;
+                    command.Parameters.Add("@Extn", SqlDbType.VarChar).Value = extn;
+                    command.Parameters.Add("@Language", SqlDbType.NChar).Value = language;
+                    command.Parameters.Add("@ModuleId", SqlDbType.Int).Value = moduleId;
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                finally
+                {
+                    //TODO fixa så connection stängs
+                    var state = connection.State;
+                    connection.Close();
+                    state = connection.State;
+                }
+            }
+        }
         //TODO: Fixa connectionsträng kopplat till det här projektet
         //TODO: Stänga connection
         public void SeedDbWithExamFile()
@@ -154,15 +197,15 @@ namespace ThesisProject.Data
         {
             var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
 
-            var path = "C:\\Users\\Olivia\\Desktop\\rainbow.jpg";
-            var fi = new FileInfo("rainbow");
+            var path = "C:\\Users\\Olivia\\Desktop\\bild 1.jpg";
+            var fi = new FileInfo("bild 1");
             var documentContent = System.IO.File.ReadAllBytes(path);
 
             //string name = fi.Name;
             //string extn = fi.Extension;
 
             //TODO: Fixa hårdkodade värden
-            var name = "rainbow";
+            var name = "if-statement";
             var extn = "jpg";
             var moduleId = 1009;
 

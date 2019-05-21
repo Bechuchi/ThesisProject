@@ -7,29 +7,11 @@
 
 <h1>@Localizer[Model.Name.ToString()]</h1>
 
-@*<nav class="progress-nav">
-    @foreach (var module in Model.ModulesVM)
-    {
-        if (module.Status == "TODO")
-        {
-            <button class="btn btn-danger disabled">@module.Name</button>
-        }
-        else if (module.Status == "In progress")
-        {
-            <button class="btn btn-warning active">@module.Name</button>
-        }
-        else
-        {
-            <button class="btn btn-success disabled">@module.Name</button>
-        }
-    }
-</nav>*@
-
 <div id="moduleWrapper" style="overflow: hidden">
     <div id="accordion" style="float: left">
         @foreach (var module in Model.ModulesVM)
         {
-            <div class="card">
+            <div class="card ">
                 <div class="card-header" id="@("heading" + module.Id)">
                     <h6 class="mb-0">
                         <button class="btn btn-link" data-toggle="collapse" data-target="#@("collapse" + module.Id)" aria-expanded="true" aria-controls="@("collapse" + module.Id)">
@@ -50,10 +32,9 @@
 
                                 @foreach (var facts in module.Facts)
                                 {
-
                                     <p class="mb-0">
                                         <button class="btn btn-link" onclick="openModuleDetails(@facts.Id, 'facts')">
-                                            @facts.Name
+                                            @Localizer[facts.Name.ToString()]
                                         </button>
                                     </p>
                                 }
@@ -62,14 +43,15 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                        <h6>@Localizer["Module.Exercises"]</h6>
+                                    <h6>@Localizer["Module.Exercises"]</h6>
                                 </div>
 
                                 @foreach (var exercise in module.Exercises)
                                 {
                                     <p class="mb-0">
                                         <button class="btn btn-link" onclick="openModuleDetails(@exercise.Id, 'exercises')">
-                                            @exercise.Name
+                                            @*@exercise.Name*@
+                                            @Localizer[exercise.Name.ToString()]
                                         </button>
                                     </p>
                                 }
@@ -90,6 +72,21 @@
                                     </p>
                                 }
                             </div>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6>@Localizer["Module.Images"]</h6>
+                                </div>
+
+                                @foreach (var image in module.Images)
+                                {
+                                    <p class="mb-0">
+                                        <button class="btn btn-link" onclick="openModuleDetails(@image.Id, 'images')">
+                                            @image.Name
+                                        </button>
+                                    </p>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,7 +95,7 @@
     </div>
 
     <div id="currentModule">
-        
+
         <embed class="facts-details-container" src="@Url.Action( "BrowsePdf", "Modules", new { fileId = 1, pdfType = "facts" } )" width="700" height="400" />
     </div>
     <br />

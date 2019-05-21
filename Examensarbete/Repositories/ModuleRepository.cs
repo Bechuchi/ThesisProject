@@ -22,6 +22,7 @@ namespace ThesisProject.Repositories
                 .Include(m => m.Facts)
                 .Include(m => m.ExerciseFile)
                 .Include(m => m.ExamFile)
+                .Include(m => m.Image)
                 .Where(m => m.CourseId == courseId)
                 .ToList();
 

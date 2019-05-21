@@ -24,6 +24,7 @@ namespace ThesisProject.Controllers
 {
     public class HomeController : Controller
     {
+        public string _currentLanguage;
         private ThesisProjectDBContext _context;
         private ModuleRepository _moduleRepository;
 
@@ -39,7 +40,7 @@ namespace ThesisProject.Controllers
             _moduleRepository = new ModuleRepository(_context);
             _localizer = localizer;
         }
-        
+
         public IActionResult Today()
         {
             var course = _context.Course
@@ -105,6 +106,10 @@ namespace ThesisProject.Controllers
 
         public IActionResult Index()
         {
+            //var seeder = new FileSeeder(_context);
+            //seeder.SeedDbWithImage();
+            //seeder.SeedDbWithExamFileByLanguage();
+
             var viewModel = new IndexViewModel
             {
                 Heading = "Welcome",
@@ -116,6 +121,7 @@ namespace ThesisProject.Controllers
 
         public IActionResult Test()
         {
+            
             var course = _context.Course
                 .FirstOrDefault();
 
@@ -142,6 +148,11 @@ namespace ThesisProject.Controllers
                     {
                         Id = e.Id,
                         Name = e.Name
+                    }),
+                    Images = r.Image.Select(e => new ImageViewModel
+                    {
+                        Id = e.Id,
+                        Name = e.Name
                     })
                 })
             };
@@ -158,6 +169,8 @@ namespace ThesisProject.Controllers
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
             );
 
+            _currentLanguage = culture;
+
             return LocalRedirect(returnUrl);
         }
 
@@ -165,6 +178,7 @@ namespace ThesisProject.Controllers
         {
             //TODO: Move process of seeding
             var seeder = new FileSeeder(_context);
+            //seeder.SeedDbWithExamFileByLanguage();
             //seeder.SeedDbWithImage();
             //seeder.SeedDbWithExerciseFile();
             //seeder.SeedDbWithExamFile();

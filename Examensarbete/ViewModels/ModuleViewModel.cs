@@ -18,6 +18,7 @@ namespace ThesisProject.ViewModels
         public IEnumerable<FactViewModel> Facts { get; set; }
         public IEnumerable<ExerciseViewModel> Exercises { get; set; }
         public IEnumerable<ExamViewModel> Exams { get; set; }
+        public IEnumerable<ImageViewModel> Images { get; set; }
 
         public List<PartOfModule> PartsOfModule { get; set; }
 

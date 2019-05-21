@@ -19,6 +19,7 @@ namespace ThesisProject.Repositories
 
         public byte[] GetExamFile(int id)
         {
+            //TODO ta bort hårdkodat id
             id = 14;
             var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
 
@@ -28,6 +29,7 @@ namespace ThesisProject.Repositories
                 connection.Open();
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@Id", SqlDbType.Int).Value = id; //TODO fixa värdena (id för lagrade pdf)
+                //cmd.Parameters.Add("@Language", SqlDbType.Int).Value = language;
 
                 byte[] myBytes = new byte[0];
 
@@ -42,6 +44,7 @@ namespace ThesisProject.Repositories
 
         public byte[] GetCurrentFile(int fileId, string cmdText)
         {
+            //TODO fixa connsträng
             var connectionString = "Server=localhost;Database=ThesisProjectDB;Integrated Security=True;";
 
             using (var connection = new SqlConnection(connectionString))

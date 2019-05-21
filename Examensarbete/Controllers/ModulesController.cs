@@ -88,6 +88,7 @@ namespace ThesisProject.Controllers
         public ActionResult BrowsePdf(int fileId, string pdfType)
         {
             string cmdText = "";
+            var fileLang = _context.ExamFile.Where(e => e.Id == fileId).Select(e => e.Language).SingleOrDefault();
 
             switch (pdfType)
             {

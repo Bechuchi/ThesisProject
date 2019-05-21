@@ -91,6 +91,7 @@ namespace ThesisProject.Controllers
 
             switch (pdfType)
             {
+                //TODO: Fixa part type
                 case "facts":
                     cmdText = "GetFactsFileById";
                     break;

@@ -39,6 +39,69 @@ namespace ThesisProject.Controllers
             _localizer = localizer;
         }
 
+        public IActionResult Today()
+        {
+            var course = _context.Course
+                .FirstOrDefault();
+
+            var modules = _moduleRepository.GetModulesForCourse(course.Id); ;
+
+            var viewModel = new CourseViewModel
+            {
+                Name = course.Name,
+                ModulesVM = modules.Select(r => new ModuleViewModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    PartsOfModule = new List<PartOfModule>()
+                    {
+                        new PartOfModule
+                        {
+                            Id = 1,
+                            PartType = "facts",
+                            FactsNew = r.Facts.Select(f => new FactViewModel
+                            {
+                                Id = f.Id,
+                                Name = f.Name
+                            }).ToList()
+                        },
+                        new PartOfModule
+                        {
+                            Id = 2,
+                            PartType = "exercises"
+                        },
+                        new PartOfModule
+                        {
+                            Id = 3,
+                            PartType = "exams",
+                            ExamsNew = r.ExamFile.Select(e => new ExamViewModel
+                            {
+                                Id = e.Id,
+                                Name = e.Name
+                            }).ToList()
+                        }
+                    },
+                    Facts = r.Facts.Select(f => new FactViewModel
+                    {
+                        Id = f.Id,
+                        Name = f.Name
+                    }),
+                    Exams = r.ExamFile.Select(e => new ExamViewModel
+                    {
+                        Id = e.Id,
+                        Name = e.Name
+                    }),
+                    Exercises = r.ExerciseFile.Select(e => new ExerciseViewModel
+                    {
+                        Id = e.Id,
+                        Name = e.Name
+                    })
+                })
+            };
+
+            return View(viewModel);
+        }
+
         public IActionResult Index()
         {
             var viewModel = new IndexViewModel

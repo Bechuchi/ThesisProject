@@ -1,0 +1,167 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model ThesisProject.ViewModels.CourseViewModel
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = "Today";
+}
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
+
+<h1>@Localizer[Model.Name.ToString()]</h1>
+
+<nav class="progress-nav">
+    @foreach (var module in Model.ModulesVM)
+    {
+        if (module.Status == "TODO")
+        {
+            <button class="btn btn-danger disabled">@module.Name</button>
+        }
+        else if (module.Status == "In progress")
+        {
+            <button class="btn btn-warning active">@module.Name</button>
+        }
+        else
+        {
+            <button class="btn btn-success disabled">@module.Name</button>
+        }
+    }
+</nav>
+
+<div id="moduleWrapper" style="overflow: hidden">
+    <div id="accordion" style="float: left">
+        @foreach (var module in Model.ModulesVM)
+        {
+            <div class="card">
+                <div class="card-header" id="@("heading" + module.Id)">
+                    <h6 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#@("collapse" + module.Id)" aria-expanded="true" aria-controls="@("collapse" + module.Id)">
+                            @module.Name
+                        </button>
+                    </h6>
+                </div>
+
+                <div id="@("collapse" + module.Id)" class="collapse @*show*@" aria-labelledby="@("heading" + module.Id)" data-parent="#accordion">
+                    <div class="card-body">
+                        @foreach (var part in module.PartsOfModule)
+                        {
+                            <h6>@part.PartType</h6>
+
+                          
+
+                            @foreach (var x in part.FactsNew)
+                            {
+                                <p class="mb-0">
+                                    <button class="btn btn-link" onclick="openModuleDetails(@x.Id, @part.PartType)">
+                                        @x.Name
+                                    </button>
+                                </p>
+                            }
+                            @*<div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action active">
+                                    Cras justo odio
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                                <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                                <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+                                <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
+                            </div>*@
+                        }
+
+                        @*<div id="card-sections">
+
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <button class="btn btn-link">
+                            Facts:
+                        </button>
+                    </h6>
+                </div>
+
+                @foreach (var facts in module.Facts)
+                {
+
+                    <p class="mb-0">
+                        <button class="btn btn-link" onclick="openModuleDetails(@facts.Id, 'facts')">
+                            @facts.Name
+                        </button>
+                    </p>
+                }
+            </div>
+            <br />
+
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <button class="btn btn-link">
+                            Exercises:
+                        </button>
+                    </h6>
+                </div>
+
+                @foreach (var exercise in module.Exercises)
+                {
+                    <p class="mb-0">
+                        <button class="btn btn-link" onclick="openModuleDetails(@exercise.Id, 'exercises')">
+                            @exercise.Name
+                        </button>
+                    </p>
+                }
+            </div>
+            <br />
+
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <button class="btn btn-link">
+                            Exams:
+                        </button>
+                    </h6>
+                </div>
+
+                @foreach (var exam in module.Exams)
+                {
+                    <p class="mb-0">
+                        <button class="btn btn-link" onclick="openModuleDetails(@exam.Id, 'exams')">
+                            @exam.Name
+                        </button>
+                    </p>
+                }
+            </div>
+        </div>*@
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div id="currentModule">
+
+        <embed class="facts-details-container" src="@Url.Action( "BrowsePdf", "Modules", new { fileId = 1, pdfType = "facts" } )" width="700" height="400" />
+    </div>
+</div>
+
+<script>
+
+    function openModuleDetails(id, type) {
+
+        var element = document.getElementById("currentModule");
+
+        //var content = content;
+        var id = id;
+        var type = type;
+        var sendData = { id: id, type: type}
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("Details", "Modules")",
+            data: sendData,
+            success: function (data) {
+                 element.innerHTML = data
+            },
+            traditional: true
+        });
+    }
+</script>

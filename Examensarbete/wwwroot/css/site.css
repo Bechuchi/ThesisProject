@@ -1,9 +1,8 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
 body {
-    padding-top: 50px;
     padding-bottom: 20px;
-    background-color: #333333;
+    background-color: white;
 }
 
 /* Wrapping element */
@@ -47,10 +46,21 @@ body {
 .navbar-fixed-top, .navbar-fixed-bottom {
     /*width: 80% !important;*/
     margin: auto !important;
-    background-color: #660066;
-    /*background-color: #ffccdd;*/
+    background-color: #204693;
     color: white;
+    height: 50px;
 }
+
+/*TODO:*/
+/*COLOR LIGHT BLUE VIASAT: #e8eef6*/
+
+/*TODO: Byta till vit text i navbar*/
+/*.nav-item.active .nav-link,
+.nav-item:focus .nav-link,
+.nav-item:hover .nav-link {
+    color: #ffffff;
+}*/
+
 
 .progress-nav {
     margin-left: 240px;
@@ -69,7 +79,7 @@ body {
 
 footer {
     height: 50px;
-    width: 80%;
+    width: 100%;
     margin: auto;
     background-color: #ffffff;
     padding-top: 35px;
@@ -84,7 +94,8 @@ h1 {
     text-align: center;
     margin-bottom: 35px;
     margin-top: 35px;
-    color: #660066;
+    color: #204693;
+    /*TODO: Byt färg*/
 }
 
 .card{

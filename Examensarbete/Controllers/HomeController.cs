@@ -18,6 +18,7 @@ using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Http;
 using System.Data.SqlClient;
 using System.Data;
+using System.Globalization;
 
 namespace ThesisProject.Controllers
 {
@@ -38,7 +39,7 @@ namespace ThesisProject.Controllers
             _moduleRepository = new ModuleRepository(_context);
             _localizer = localizer;
         }
-
+        
         public IActionResult Today()
         {
             var course = _context.Course
@@ -147,22 +148,6 @@ namespace ThesisProject.Controllers
 
             return View(viewModel);
         }
-
-        //public IActionResult Test()
-        //{
-        //    var course = _context.Course
-        //        .FirstOrDefault();
-
-        //    var modules = _moduleRepository.GetModulesForCourse(course.Id); ;
-
-        //    var viewModel = new CourseViewModel
-        //    {
-        //        Name = course.Name,
-        //        Modules = modules
-        //    };
-
-        //    return View(viewModel);
-        //}
 
         [HttpPost]
         public IActionResult SetLanguage(string culture, string returnUrl)

@@ -23,7 +23,15 @@
     </environment>
 </head>
 <body>
-        @Html.Partial("_TopNavigation")
+    @*@Html.Partial("_TopNavigation")*@
+    <nav class="navbar navbar-fixed-top navbar-expand-lg">
+        <div class="nav navbar-nav">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-item nav-link">@Localizer["TopNavigation.Home"]</a>
+            @*<a asp-area="" asp-controller="Home" asp-action="Course" class="nav-item nav-link">@Localizer["TopNavigation.Courses"]</a>*@
+            <a asp-area="" asp-controller="Home" asp-action="Test" class="nav-item nav-link">@Localizer["TopNavigation.Home"]</a>
+            <a asp-area="" asp-controller="Home" asp-action="Today" class="nav-item nav-link">@Localizer["TopNavigation.Courses"]</a>
+        </div>
+    </nav>
 
     <div class="big-container">
         @* TODO: Ta bort rensa *@
@@ -67,6 +75,17 @@
         </div>
     </div>
     <hr />
+    @*<footer>
+        <div class="row">
+            <div class="col-sm-6">
+                <p>&copy; 2016 - Adding Localization</p>
+            </div>
+            <div class="col-sm-6 text-right">
+                @await Html.PartialAsync("_SelectLanguagePartial")
+            </div>
+        </div>
+    </footer>*@
+
     <footer>
         <div class="row">
             <div class="col-sm-6">
@@ -77,6 +96,7 @@
             </div>
         </div>
     </footer>
+
 
 
     <environment include="Development">

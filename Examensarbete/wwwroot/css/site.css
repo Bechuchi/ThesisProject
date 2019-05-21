@@ -55,12 +55,12 @@ body {
 /*COLOR LIGHT BLUE VIASAT: #e8eef6*/
 
 /*TODO: Byta till vit text i navbar*/
-/*.nav-item.active .nav-link,
-.nav-item:focus .nav-link,
-.nav-item:hover .nav-link {
-    color: #ffffff;
-}*/
 
+
+
+.nav-link {
+    color: #e8eef6;
+}
 
 .progress-nav {
     margin-left: 240px;
@@ -75,13 +75,14 @@ body {
     /*margin-right: 120px;*/
     margin-left: 50px;
     width: 70%;
+    height: 600px;
 }
 
 footer {
     height: 50px;
     width: 100%;
     margin: auto;
-    background-color: #ffffff;
+    background-color: #204693;
     padding-top: 35px;
     padding-bottom: 35px;
 }

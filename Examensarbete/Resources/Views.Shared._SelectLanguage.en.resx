@@ -120,6 +120,12 @@
   <data name="Btn.Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="Franska" xml:space="preserve">
+    <value>french</value>
+  </data>
+  <data name="Request culture provider:" xml:space="preserve">
+    <value />
+  </data>
   <data name="Txt.Language" xml:space="preserve">
     <value>Language</value>
   </data>

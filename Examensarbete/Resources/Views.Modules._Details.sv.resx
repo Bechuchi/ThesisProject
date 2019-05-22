@@ -117,49 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Frågesport 1" xml:space="preserve">
-    <value>Questioning 1</value>
-  </data>
-  <data name="Home Page" xml:space="preserve">
-    <value>Page d'acctueil</value>
-  </data>
-  <data name="if-music" xml:space="preserve">
-    <value>If-musique</value>
-  </data>
-  <data name="if-statement" xml:space="preserve">
-    <value>If-statement</value>
-  </data>
-  <data name="Module.1.Fact" xml:space="preserve">
-    <value>C'est quoi de programmation?</value>
-  </data>
-  <data name="Module.Exams" xml:space="preserve">
-    <value>Des Examas</value>
-  </data>
-  <data name="Module.Exercises" xml:space="preserve">
-    <value>Des Exercises</value>
-  </data>
-  <data name="Module.Facts" xml:space="preserve">
-    <value>D'Information</value>
-  </data>
-  <data name="Module.Images" xml:space="preserve">
-    <value>Des Images</value>
-  </data>
-  <data name="Module.Name.1" xml:space="preserve">
-    <value>D'Introduction</value>
-  </data>
-  <data name="Module.Name.2" xml:space="preserve">
-    <value>Des Variables</value>
-  </data>
-  <data name="Programming for dummies" xml:space="preserve">
-    <value>De Programmation pour des débutants</value>
-  </data>
-  <data name="Txt.Module" xml:space="preserve">
-    <value>Module</value>
-  </data>
-  <data name="Module.Intro.Exam.1" xml:space="preserve">
-    <value>L'exam 1</value>
-  </data>
   <data name="link.download" xml:space="preserve">
-    <value>Télécharger</value>
+    <value>Ladda ner</value>
   </data>
 </root>

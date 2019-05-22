@@ -25,7 +25,7 @@ namespace ThesisProject.Controllers
 {
     public class HomeController : Controller
     {
-        public string _currentLanguage;
+        public string CurrentLanguage { get; set; }
         private ThesisProjectDBContext _context;
         private ModuleRepository _moduleRepository;
         private IConfiguration _configuration;
@@ -159,6 +159,8 @@ namespace ThesisProject.Controllers
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
             );
+
+            CurrentLanguage = culture;
 
             return LocalRedirect(returnUrl);
         }
